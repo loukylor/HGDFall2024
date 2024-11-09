@@ -91,20 +91,17 @@ namespace HGDFall2024.Managers
 
         public void NextAttachment()
         {
-            int next = (int)CurrentAttachment.Attachment + 1;
-            int max = ProgressManager.Instance.AvailableAttachments.Cast<int>().Max();
-            if (max == 0)
-            {
-                return;
-            }
-            SetAttachment((AttachmentType)(next % (max + 1)));
+            AttachmentType[] available = ProgressManager.Instance.AvailableAttachments;
+            int index = 1 + Array.IndexOf(available, CurrentAttachment.Attachment);
+            index %= available.Length;
+            SetAttachment(available[index]);
         }
 
         public void PreviousAttachment()
         {
-            int last = (int)CurrentAttachment.Attachment - 1;
-            int max = ProgressManager.Instance.AvailableAttachments.Cast<int>().Max();
-            SetAttachment((AttachmentType)(last < 0 ? max : last));
+            AttachmentType[] available = ProgressManager.Instance.AvailableAttachments;
+            int index = -1 + Array.IndexOf(available, CurrentAttachment.Attachment);
+            SetAttachment(index >= 0 ? available[index] : available[^1]);
         }
     }
 }

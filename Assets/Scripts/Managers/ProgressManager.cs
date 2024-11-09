@@ -23,7 +23,7 @@ namespace HGDFall2024.Managers
         }
 
         public event Action<AttachmentType[], AttachmentType[]> OnAvailableAttachmentsChanged;
-        private AttachmentType[] _availableAttachments = new AttachmentType[2] { AttachmentType.None ,AttachmentType.Blower };
+        private AttachmentType[] _availableAttachments = new AttachmentType[2] { AttachmentType.None ,AttachmentType.Pistol };
         public AttachmentType[] AvailableAttachments 
         { 
             get => _availableAttachments;
@@ -36,6 +36,8 @@ namespace HGDFall2024.Managers
                     return;
                 }
 
+                // Make sure switch order is consistent
+                Array.Sort(value);
                 OnAvailableAttachmentsChanged?.Invoke(_availableAttachments, value);
                 _availableAttachments = value;
                 PlayerPrefs.SetString(nameof(AvailableAttachments), string.Join(',', _availableAttachments));
