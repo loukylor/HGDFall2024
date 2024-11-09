@@ -23,11 +23,11 @@ namespace HGDFall2024.Attachments
             renderer = GetComponent<SpriteRenderer>();
         }
 
-        private void Update()
+        protected override void Update()
         {
-            // cast to vector2 to truncate z value
-            Vector2 mousePos = InputManager.Instance.Player.PointerPosition.ReadValue<Vector2>();
-            transform.position = (Vector2)Camera.main.ScreenToWorldPoint(mousePos);
+            base.Update();
+
+            transform.position = MousePosition;
 
             // rotate blower to face player
             Vector2 diff = PlayerManager.Instance.Player.transform.position - transform.position;

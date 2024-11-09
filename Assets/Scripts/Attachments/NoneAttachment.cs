@@ -54,8 +54,10 @@ namespace HGDFall2024.Attachments
             }
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+
             if (connectedObject != null)
             {
                 SetOutline(connectedObject.gameObject);
@@ -89,13 +91,10 @@ namespace HGDFall2024.Attachments
         {
             hoverObject = null;
 
-            Vector2 screenPos = InputManager.Instance.Player.PointerPosition.ReadValue<Vector2>();
-            Vector2 pos = Camera.main.ScreenToWorldPoint(screenPos);
-            
-            Vector2 diff = pos - (Vector2)connectedObject.transform.position;
+            Vector2 diff = MousePosition - (Vector2)connectedObject.transform.position;
             connectedObject.velocity = diff * lerpSpeed / Time.fixedDeltaTime;
 
-            lineRenderer.SetPosition(0, pos);
+            lineRenderer.SetPosition(0, MousePosition);
             lineRenderer.SetPosition(1, connectedObject.transform.position);
             lineRenderer.enabled = true;
         }
@@ -105,10 +104,7 @@ namespace HGDFall2024.Attachments
             lineRenderer.enabled = false;
             connectedObject = null;
 
-            Vector2 screenPos = InputManager.Instance.Player.PointerPosition.ReadValue<Vector2>();
-            Vector2 pos = Camera.main.ScreenToWorldPoint(screenPos);
-
-            int hitCount = Physics2D.RaycastNonAlloc(pos, Vector2.zero, hits, 0);
+            int hitCount = Physics2D.RaycastNonAlloc(MousePosition, Vector2.zero, hits, 0);
             GameObject hit = null;
             for (int i = 0; i < hitCount; i++)
             {
