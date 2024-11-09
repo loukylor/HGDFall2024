@@ -1,0 +1,33 @@
+turrets
+ - with voice lines like searching for target
+ - add easteregg so every now and then it says something different
+
+walls taht close in on you
+ - time restrictions in general
+ - shoot things while flying through the air
+
+targetable things always come from the same direction, so it's not cumbersome to cycle
+ - targets/buttons on the walls
+
+enemies
+ - funni voicelines like h3vr
+ - probably pretty fragile?
+ - probably bad ai (not very threatening)
+ - sometimes bleed on death instead of balloon particles lmfao
+
+fans
+ - sometimes stop to take a breath
+
+pickups like armor or health
+
+maybe one long level with a story?
+ - intermitent saves?
+
+SCREEN SHAKE 
+ - be execessive
+
+think of things to fill in the silence
+
+instead of targetables maybe weapons will be in the same slot at the blower
+ - gun will have excessive push, but is obviously powerfu
+ - electric gun will have no push at all, but is still powerful, less range
