@@ -1,10 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace HGDFall2024.Projectiles
 {
     public class PistolProjectile : ProjectileBase
     {
         public float speed;
+        public float lifetime = 3;
+
+        private void Start()
+        {
+            StartCoroutine(LifetimeCoroutine());
+        }
+
+        private IEnumerator LifetimeCoroutine()
+        {
+            yield return new WaitForSeconds(lifetime);
+
+            Destroy(gameObject);
+        }
 
         private void Update()
         {
