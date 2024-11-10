@@ -73,7 +73,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -188,7 +188,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 12.15, y: 8}
+  m_Size: {x: 11.5, y: 8}
   m_Direction: 1
 --- !u!58 &1003175900255333642
 CircleCollider2D:

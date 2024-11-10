@@ -1,11 +1,12 @@
-﻿using HGDFall2024.Managers;
+﻿using HGDFall2024.LevelElements;
+using HGDFall2024.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace HGDFall2024
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour
+    public class Player : Targetable
     {
         public Rigidbody2D Rb { get; private set; }
 
@@ -34,6 +35,11 @@ namespace HGDFall2024
         private void OnCycleAttachmentNext(InputAction.CallbackContext context)
         {
             PlayerManager.Instance.NextAttachment();
+        }
+
+        protected override void OnHit(Collider2D collider)
+        {
+            Debug.Log("ive been shot");
         }
     }
 }

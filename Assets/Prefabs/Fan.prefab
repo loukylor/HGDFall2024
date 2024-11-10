@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4364509087872731848}
   - component: {fileID: 5481176919045359503}
   - component: {fileID: 4082620586243367965}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 7175953573201167249}
   - component: {fileID: 2457871549371884272}
   - component: {fileID: 5752290827496244468}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Fan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
