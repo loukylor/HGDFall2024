@@ -1,28 +1,23 @@
 ﻿using HGDFall2024.Managers;
-using HGDFall2024.Projectiles;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace HGDFall2024.Attachments
 {
-    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Gun))]
     public class PistolAttachment : BaseAttachment
     {
         public override AttachmentType Attachment { get; } = AttachmentType.Pistol;
 
-        public float radius = 0.5f;
         public float fireDelay = 0.25f;
         public float recoil = 3;
 
         private float lastFireTime = 0;
-
-        private new SpriteRenderer renderer;
-        private ProjectileBase projectile;
+        private Gun gun;
 
         private void Start()
         {
-            renderer = GetComponent<SpriteRenderer>();
-            projectile = GetComponentInChildren<ProjectileBase>(true);
+            gun = GetComponent<Gun>();
         }
 
         private void OnEnable()
@@ -43,12 +38,7 @@ namespace HGDFall2024.Attachments
             }
             lastFireTime = Time.time;
 
-            GameObject newProjectile = Instantiate(projectile.gameObject);
-            newProjectile.transform.SetPositionAndRotation(
-                transform.position + (transform.right * 0.1f), 
-                transform.rotation
-            );
-            newProjectile.SetActive(true);
+            gun.Fire();
 
             Vector2 playerPos = PlayerManager.Instance.Player.transform.position;
             Vector2 direction = (playerPos - MousePosition).normalized;
@@ -62,11 +52,8 @@ namespace HGDFall2024.Attachments
             Vector2 playerPos = PlayerManager.Instance.Player.transform.position;
             Vector2 direction = (MousePosition - playerPos).normalized;
 
-            transform.position = playerPos + (direction * radius);
-            float angle = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x);
-            transform.eulerAngles = new Vector3(0, 0, angle);
-
-            renderer.flipY = Mathf.Abs(angle) > 90;
+            gun.direction = direction;
+            gun.origin = playerPos;
         }
     }
 }

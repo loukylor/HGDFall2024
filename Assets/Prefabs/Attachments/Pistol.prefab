@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1745438218771314925}
   - component: {fileID: 3969902215880774236}
   - component: {fileID: 6575453093311791693}
+  - component: {fileID: 4095481462250081502}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -46,9 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e2882f00623f84fb764138cc9cb029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
   fireDelay: 0.75
-  recoil: 6
+  recoil: 10
 --- !u!212 &6575453093311791693
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -101,6 +101,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4095481462250081502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087593026173843273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57224250336284e41808dee7595385e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {x: 0, y: 0}
+  radius: 1
+  direction: {x: 0, y: 0}
 --- !u!1 &2792884556834068139
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  lifetime: 3
 --- !u!212 &9174626788882234655
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -190,7 +206,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 68459d8ff87387248be2b520cec67070, type: 3}
-  m_Color: {r: 1, g: 0.98576313, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
