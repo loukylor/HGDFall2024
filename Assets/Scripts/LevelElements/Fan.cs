@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HGDFall2024
+namespace HGDFall2024.LevelElements
 {
     [RequireComponent(typeof(BoxCollider2D))]
     public class Fan : MonoBehaviour
@@ -29,6 +29,16 @@ namespace HGDFall2024
             }
 
             if (collision.attachedRigidbody == null)
+            {
+                return;
+            }
+
+            RaycastHit2D hit = Physics2D.Linecast(
+                transform.position, 
+                collision.transform.position, 
+                LayerMask.GetMask("Default", "Pickupable")
+            );
+            if (hit.collider != null)
             {
                 return;
             }

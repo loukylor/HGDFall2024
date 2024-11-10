@@ -48,8 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: b235b91771f452d4297ef501a9b9f042, type: 2}
   outlineWidth: 0.05
-  outlineColor: {r: 1, g: 1, b: 0, a: 1}
-  lerpSpeed: 0.2
+  outlineColor: {r: 0, g: 1, b: 0.12194967, a: 1}
+  lerpSpeed: 0.3
+  maxSpeed: 10
 --- !u!331 &7433063488629477068
 SpriteMask:
   m_ObjectHideFlags: 0

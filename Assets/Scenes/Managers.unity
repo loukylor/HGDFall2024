@@ -144,6 +144,14 @@ PrefabInstance:
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 0.053569794
       objectReference: {fileID: 0}
+    - target: {fileID: 3396756454333446396, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
+      propertyPath: maxSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396756454333446396, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
+      propertyPath: lerpSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4088489898301910292, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -1,7 +1,7 @@
 ﻿using HGDFall2024.Projectiles;
 using UnityEngine;
 
-namespace HGDFall2024
+namespace HGDFall2024.LevelElements
 {
     [RequireComponent(typeof(Collider2D))]
     public abstract class Targetable : MonoBehaviour

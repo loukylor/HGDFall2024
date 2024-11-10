@@ -3693,7 +3693,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     type: 1
     collisionMode: 1
@@ -3866,7 +3866,7 @@ ParticleSystem:
     radiusScale: 0.1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 129
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -4841,7 +4841,9 @@ GameObject:
   - component: {fileID: 7709687315307957882}
   - component: {fileID: 7637672044270071192}
   - component: {fileID: 990502438623969451}
-  - component: {fileID: 5296550808667496096}
+  - component: {fileID: 7175953573201167249}
+  - component: {fileID: 2457871549371884272}
+  - component: {fileID: 5752290827496244468}
   m_Layer: 3
   m_Name: Fan
   m_TagString: Untagged
@@ -4962,7 +4964,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 3.53}
   m_EdgeRadius: 0
---- !u!114 &5296550808667496096
+--- !u!114 &7175953573201167249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4971,11 +4973,83 @@ MonoBehaviour:
   m_GameObject: {fileID: 6050756227228551831}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 647a31e53f392fa4386a8d050d0aafd3, type: 3}
+  m_Script: {fileID: 11500000, guid: 51b52ed742d6b8f448dfcc261d817b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   length: 10
-  force: 2
+  force: 1
   layers:
     serializedVersion: 2
     m_Bits: 8
+--- !u!61 &2457871549371884272
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050756227228551831}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.36, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.36, y: 3.53}
+    newSize: {x: 2.36, y: 3.53}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.62, y: 3.53}
+  m_EdgeRadius: 0
+--- !u!50 &5752290827496244468
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050756227228551831}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
