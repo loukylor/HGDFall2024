@@ -31,7 +31,7 @@ namespace HGDFall2024.Managers
 #if UNITY_EDITOR
         private void Start()
         {
-            OnSceneChange(SceneManager.GetSceneByName("Game"), SceneManager.GetSceneByName("Game"));
+            Player = GameObject.Find("Balloon").GetComponent<Player>();
         }
 #endif
 

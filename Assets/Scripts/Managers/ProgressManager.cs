@@ -23,7 +23,7 @@ namespace HGDFall2024.Managers
         }
 
         public event Action<AttachmentType[], AttachmentType[]> OnAvailableAttachmentsChanged;
-        private AttachmentType[] _availableAttachments = new AttachmentType[2] { AttachmentType.None ,AttachmentType.Pistol };
+        private AttachmentType[] _availableAttachments = new AttachmentType[3] { AttachmentType.None, AttachmentType.Blower, AttachmentType.Pistol };
         public AttachmentType[] AvailableAttachments 
         { 
             get => _availableAttachments;
