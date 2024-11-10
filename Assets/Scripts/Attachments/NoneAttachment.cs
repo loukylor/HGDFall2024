@@ -14,6 +14,7 @@ namespace HGDFall2024.Attachments
         public float outlineWidth = 0.05f;
         public Color outlineColor = Color.yellow;
         public float lerpSpeed = 0.3f;
+        public float maxSpeed = 10;
 
         private Rigidbody2D connectedObject;
         private GameObject hoverObject;
@@ -92,7 +93,8 @@ namespace HGDFall2024.Attachments
             hoverObject = null;
 
             Vector2 diff = MousePosition - (Vector2)connectedObject.transform.position;
-            connectedObject.velocity = diff * lerpSpeed / Time.fixedDeltaTime;
+            Vector2 velocity = diff * lerpSpeed / Time.fixedDeltaTime;
+            connectedObject.velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
 
             lineRenderer.SetPosition(0, MousePosition);
             lineRenderer.SetPosition(1, connectedObject.transform.position);
