@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace HGDFall2024.LevelElements
 {
@@ -13,6 +14,8 @@ namespace HGDFall2024.LevelElements
         private float lastFired = 0;
         private Gun gun;
         private EnemyState state = EnemyState.Waiting;
+
+        public event Action OnDeath;
 
         private void Start()
         {
@@ -85,6 +88,7 @@ namespace HGDFall2024.LevelElements
         public void Kill()
         {
             Destroy(gameObject);
+            OnDeath?.Invoke();
         }
 
         public void OnDamaged(int damage)

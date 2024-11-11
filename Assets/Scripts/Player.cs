@@ -1,5 +1,6 @@
 ﻿using HGDFall2024.LevelElements;
 using HGDFall2024.Managers;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,8 @@ namespace HGDFall2024
     public class Player : Balloon, IDamagable
     {
         public Rigidbody2D Rb { get; private set; }
+
+        public event Action OnDeath;
 
         private void Start()
         {
@@ -45,6 +48,7 @@ namespace HGDFall2024
         public void OnDamaged(int damage)
         {
             Destroy(gameObject);
+            OnDeath?.Invoke();
         }
     }
 }
