@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HGDFall2024.Projectiles
 {
-    public class PistolProjectile : ProjectileBase
+    public class PistolProjectile : Damager
     {
         public float speed;
         public float lifetime = 3;

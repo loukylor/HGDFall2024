@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2292828274182154763}
   - component: {fileID: 2358056240604523958}
   - component: {fileID: 6087035714110131981}
-  - component: {fileID: 2957172596023540164}
+  - component: {fileID: 4905666714514322683}
   m_Layer: 7
   m_Name: Spike
   m_TagString: Untagged
@@ -142,7 +142,7 @@ PolygonCollider2D:
       - {x: -0.36499998, y: -0.405}
       - {x: 0.36499998, y: -0.405}
   m_UseDelaunayMesh: 0
---- !u!114 &2957172596023540164
+--- !u!114 &4905666714514322683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7170799070299894307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce53eed5b245da44e9c5b9fac1a2e8c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b380aea455f5cd478489a08170c9358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 2147483647

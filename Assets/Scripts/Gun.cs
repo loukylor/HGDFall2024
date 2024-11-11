@@ -11,12 +11,12 @@ namespace HGDFall2024
         public Vector2 direction;
 
         private new SpriteRenderer renderer;
-        private ProjectileBase projectile;
+        private Damager projectile;
 
         private void Start()
         {
             renderer = GetComponent<SpriteRenderer>();
-            projectile = GetComponentInChildren<ProjectileBase>(true);
+            projectile = GetComponentInChildren<Damager>(true);
         }
 
         private void Update()

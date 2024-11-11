@@ -1,9 +1,8 @@
-﻿using System.Drawing;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HGDFall2024.LevelElements
 {
-    public class Enemy : Targetable
+    public class Enemy : MonoBehaviour, IDamagable
     {
         public float viewRadius = 10;
         public float fireInterval = 1;
@@ -82,9 +81,14 @@ namespace HGDFall2024.LevelElements
             }
         }
 
-        protected override void OnHit(Collider2D collider)
+        public void Kill()
         {
-            Debug.Log("ive been shot");
+            Debug.Log("dieded");
+        }
+
+        public void OnDamaged(int damage)
+        {
+            Kill();
         }
 
         private enum EnemyState

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 namespace HGDFall2024
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Player : Targetable
+    public class Player : MonoBehaviour, IDamagable
     {
         public Rigidbody2D Rb { get; private set; }
 
@@ -37,9 +37,9 @@ namespace HGDFall2024
             PlayerManager.Instance.NextAttachment();
         }
 
-        protected override void OnHit(Collider2D collider)
+        public void OnDamaged(int damage)
         {
-            Debug.Log("ive been shot");
+            Debug.Log("I've been shot");
         }
     }
 }
