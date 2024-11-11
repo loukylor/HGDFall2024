@@ -37,12 +37,14 @@ namespace HGDFall2024.Managers
 
         protected override void OnDestroy()
         {
+            if (ApplicationManager.Instance.HasQuit)
+            {
+                return;
+            }
+
             base.OnDestroy();
             SceneManager.activeSceneChanged -= OnSceneChange;
-            if (ProgressManager.Instance != null)
-            {
-                ProgressManager.Instance.OnAvailableAttachmentsChanged -= OnAvailableAttachmentsChanged;
-            }
+            ProgressManager.Instance.OnAvailableAttachmentsChanged -= OnAvailableAttachmentsChanged;
         }
 
         private void OnSceneChange(Scene oldScene, Scene newScene)

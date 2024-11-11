@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 namespace HGDFall2024
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour, IDamagable
+    public class Player : Balloon, IDamagable
     {
         public Rigidbody2D Rb { get; private set; }
 
@@ -23,6 +23,11 @@ namespace HGDFall2024
 
         private void OnDisable()
         {
+            if (ApplicationManager.Instance.HasQuit)
+            {
+                return;
+            }
+
             InputManager.Instance.Player.CycleAttachmentBack.started -= OnCycleAttachmentBack;
             InputManager.Instance.Player.CycleAttachmentNext.started -= OnCycleAttachmentNext;
         }

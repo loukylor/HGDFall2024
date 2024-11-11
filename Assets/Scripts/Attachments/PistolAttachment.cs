@@ -27,6 +27,11 @@ namespace HGDFall2024.Attachments
 
         private void OnDisable()
         {
+            if (ApplicationManager.Instance.HasQuit)
+            {
+                return;
+            }
+
             InputManager.Instance.Player.Click.started -= OnClick;
         }
 

@@ -18,6 +18,11 @@ namespace HGDFall2024.Managers
 
         protected virtual void OnDestroy()
         {
+            if (ApplicationManager.Instance.HasQuit)
+            {
+                return;
+            }
+
             Debug.LogWarning(GetType().Name + " has been destroyed");
             _setter.Invoke(this, new object[1] { null });
             _setter = null;
