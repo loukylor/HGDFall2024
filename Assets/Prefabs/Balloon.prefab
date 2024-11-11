@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cf1fd2f4d927c44ba6deb212d11e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popAnim: {fileID: 6115657261991644189, guid: 6a96c817c0aa8e347a822659ef296b0c, type: 3}
 --- !u!58 &5782417732616735404
 CircleCollider2D:
   m_ObjectHideFlags: 0

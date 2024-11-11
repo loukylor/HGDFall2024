@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3875fcfabc2bf634b983fd49467dc557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popAnim: {fileID: 6115657261991644189, guid: 6a96c817c0aa8e347a822659ef296b0c, type: 3}
   viewRadius: 10
   fireInterval: 1
   searchTime: 3

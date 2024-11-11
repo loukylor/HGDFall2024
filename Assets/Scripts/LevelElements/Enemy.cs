@@ -2,7 +2,7 @@
 
 namespace HGDFall2024.LevelElements
 {
-    public class Enemy : MonoBehaviour, IDamagable
+    public class Enemy : Balloon, IDamagable
     {
         public float viewRadius = 10;
         public float fireInterval = 1;
@@ -83,7 +83,7 @@ namespace HGDFall2024.LevelElements
 
         public void Kill()
         {
-            Debug.Log("dieded");
+            Destroy(gameObject);
         }
 
         public void OnDamaged(int damage)
