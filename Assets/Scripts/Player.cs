@@ -44,7 +44,7 @@ namespace HGDFall2024
 
         public void OnDamaged(int damage)
         {
-            Debug.Log("I've been shot");
+            Destroy(gameObject);
         }
     }
 }
