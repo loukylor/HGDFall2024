@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5757026313441379128}
   - component: {fileID: 5355750569682796499}
   - component: {fileID: 291873249623702358}
-  - component: {fileID: 4816316853029566022}
   - component: {fileID: 1003175900255333642}
   - component: {fileID: 8693391637408892726}
   m_Layer: 6
@@ -155,41 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followObject: {fileID: 0}
   lerp: 0.5
---- !u!70 &4816316853029566022
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532608727876828466}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 11.5, y: 8}
-  m_Direction: 1
 --- !u!58 &1003175900255333642
 CircleCollider2D:
   m_ObjectHideFlags: 0

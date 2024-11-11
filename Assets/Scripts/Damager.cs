@@ -10,7 +10,17 @@ namespace HGDFall2024.Projectiles
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.TryGetComponent<IDamagable>(out var targetable))
+            if (!collision.TryGetComponent(out IDamagable targetable))
+            {
+                return;
+            }
+
+            targetable.OnDamaged(damage);
+        }
+
+        protected virtual void OnColliderEnter2D(Collision2D collision)
+        {
+            if (!collision.collider.TryGetComponent(out IDamagable targetable))
             {
                 return;
             }
