@@ -93,6 +93,16 @@ namespace HGDFall2024.Managers
 
         public void NextAttachment()
         {
+            if (ProgressManager.Instance.AvailableAttachments.Length == 0)
+            {
+                return;
+            }
+            else if (CurrentAttachment == null)
+            {
+                SetAttachment(ProgressManager.Instance.AvailableAttachments[0]);
+                return;
+            }
+
             AttachmentType[] available = ProgressManager.Instance.AvailableAttachments;
             int index = 1 + Array.IndexOf(available, CurrentAttachment.Attachment);
             index %= available.Length;
@@ -101,6 +111,16 @@ namespace HGDFall2024.Managers
 
         public void PreviousAttachment()
         {
+            if (ProgressManager.Instance.AvailableAttachments.Length == 0)
+            {
+                return;
+            }
+            else if (CurrentAttachment == null)
+            {
+                SetAttachment(ProgressManager.Instance.AvailableAttachments[0]);
+                return;
+            }
+
             AttachmentType[] available = ProgressManager.Instance.AvailableAttachments;
             int index = -1 + Array.IndexOf(available, CurrentAttachment.Attachment);
             SetAttachment(index >= 0 ? available[index] : available[^1]);

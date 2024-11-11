@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3671b9018c45fc44397594e9501817f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blowerDelay: 0.75
-  blowerStrength: 3
-  maxStrength: 5
+  blowerDelay: 0.6
+  blowerStrength: 4
+  maxStrength: 7
   blowerDefault: {fileID: 1266998646, guid: 9dfa18d7dba8c514a9af161a8bffb9b6, type: 3}
   blowerSqueeze: {fileID: 407693378, guid: 9dfa18d7dba8c514a9af161a8bffb9b6, type: 3}
 --- !u!212 &5711193175398945821

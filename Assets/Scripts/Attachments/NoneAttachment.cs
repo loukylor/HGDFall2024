@@ -95,7 +95,7 @@ namespace HGDFall2024.Attachments
 
             Vector2 diff = MousePosition - (Vector2)connectedObject.transform.position;
             Vector2 velocity = diff * lerpSpeed / Time.fixedDeltaTime;
-            connectedObject.velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
+            connectedObject.AddForce(Vector2.ClampMagnitude(velocity, maxSpeed));
             connectedObject.excludeLayers = LayerMask.GetMask("Player");
 
             lineRenderer.SetPosition(0, MousePosition);

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireDelay: 0.75
-  recoil: 10
+  recoil: 13
 --- !u!212 &6575453093311791693
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b62853f57cf2964aa1be1c82e689ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   speed: 15
   lifetime: 3
 --- !u!212 &9174626788882234655
@@ -249,5 +250,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.41, y: 0.08}
+  m_Size: {x: 0.3, y: 0.05}
   m_Direction: 1
