@@ -41,12 +41,19 @@ namespace HGDFall2024
             ContactPoint2D first = contacts[0];
             ContactPoint2D second = contacts[1];
 
+            Debug.Log(first.collider.name);
+            Debug.Log(second.collider.name);
+            Debug.Log(first.rigidbody == second.rigidbody);
+
             // Only get crushed between static or dynamic rb's or colliders with
             // no rbs
-            if (first.rigidbody != null 
-                && first.rigidbody.bodyType != RigidbodyType2D.Dynamic
+            if (first.rigidbody == second.rigidbody
+                || (first.rigidbody != null 
+                && first.rigidbody.bodyType == RigidbodyType2D.Dynamic
+                && first.relativeVelocity.magnitude == 0
                 && second.rigidbody != null 
-                && second.rigidbody.bodyType != RigidbodyType2D.Dynamic) 
+                && second.rigidbody.bodyType == RigidbodyType2D.Dynamic
+                && second.relativeVelocity.magnitude == 0))
             {
                 return;
             }
