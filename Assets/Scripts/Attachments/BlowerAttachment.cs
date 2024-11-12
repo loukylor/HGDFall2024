@@ -52,7 +52,7 @@ namespace HGDFall2024.Attachments
 
                 // Make blow force inverse propertional to distance squared
                 float distance = diff.magnitude;
-                float falloff = (-0.25f * distance) + 1;
+                float falloff = Mathf.Clamp((-0.25f * distance) + 1, 0, 100);
 
                 Vector2 push = blowerStrength * falloff * direction;
                 PlayerManager.Instance.Player.Rb.velocity += Vector2.ClampMagnitude(push, maxStrength);
