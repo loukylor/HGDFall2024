@@ -9,6 +9,7 @@ namespace HGDFall2024
         private static readonly ContactPoint2D[] contacts = new ContactPoint2D[2];
         
         public GameObject popAnim;
+        public bool disableAnim = false;
 
         private Rigidbody2D rb;
 
@@ -19,7 +20,7 @@ namespace HGDFall2024
 
         protected virtual void OnDestroy()
         {
-            if (ApplicationManager.Instance.HasQuit)
+            if (ApplicationManager.Instance.HasQuit || disableAnim)
             {
                 return;
             }
@@ -40,10 +41,6 @@ namespace HGDFall2024
 
             ContactPoint2D first = contacts[0];
             ContactPoint2D second = contacts[1];
-
-            Debug.Log(first.collider.name);
-            Debug.Log(second.collider.name);
-            Debug.Log(first.rigidbody == second.rigidbody);
 
             // Only get crushed between static or dynamic rb's or colliders with
             // no rbs

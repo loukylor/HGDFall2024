@@ -33,7 +33,12 @@ namespace HGDFall2024.LevelElements
         {
             base.FixedUpdate();
 
-            (GameObject player, float angle) = Helper.FindPlayer(transform.position, viewRadius, transform.right);
+            (GameObject player, float angle) = Helper.FindPlayer(
+                transform.position, 
+                viewRadius, 
+                transform.right,
+                gameObject
+            );
 
             if (player != null && state != EnemyState.Attacking)
             {

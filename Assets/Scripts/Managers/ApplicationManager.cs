@@ -16,7 +16,7 @@ namespace HGDFall2024.Managers
 
             SceneManager.activeSceneChanged += OnSceneChange;
 
-            if (!Application.isEditor || SceneManager.GetActiveScene().buildIndex == 0)
+            if (!Application.isEditor || SceneManager.loadedSceneCount == 1)
             {
                 LoadIntro();
             }

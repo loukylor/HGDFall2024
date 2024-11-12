@@ -10,6 +10,7 @@ namespace HGDFall2024
             Vector2 origin, 
             float radius, 
             Vector2 right, 
+            GameObject exclude = null,
             float viewAngle = 360
         ) {
             int hitCount = Physics2D.OverlapCircleNonAlloc(
@@ -19,9 +20,13 @@ namespace HGDFall2024
                  LayerMask.GetMask("Player")
             );
 
+            GameObject closest = null;
+            float closestAngle = 0;
+            float closestDistance = float.PositiveInfinity;
+
             for (int i = 0; i < hitCount; i++)
             {
-                if (!overlaps[i].gameObject.CompareTag("Player"))
+                if (!overlaps[i].gameObject.CompareTag("Player") || overlaps[i].gameObject == exclude)
                 {
                     continue;
                 }
@@ -43,9 +48,21 @@ namespace HGDFall2024
                     continue;
                 }
 
-                return (overlaps[i].gameObject, angle);
+                float distance = Vector2.Distance(overlaps[i].transform.position, origin);
+                if (distance < closestDistance)
+                {
+                    Debug.Log(angle);
+                    closest = overlaps[i].gameObject;
+                    closestAngle = angle;
+                    closestDistance = distance;
+                }
             }
 
+            Debug.Log(closestAngle);
+            if (closest != null)
+            {
+                return (closest, closestAngle);
+            }
             return (null, 0);
         }
     }
