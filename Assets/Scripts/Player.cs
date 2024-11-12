@@ -13,8 +13,10 @@ namespace HGDFall2024
 
         public event Action OnDeath;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             Rb = GetComponent<Rigidbody2D>();
         }
 
@@ -45,10 +47,16 @@ namespace HGDFall2024
             PlayerManager.Instance.NextAttachment();
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+         
+            OnDeath?.Invoke();
+        }
+
         public void OnDamaged(int damage)
         {
             Destroy(gameObject);
-            OnDeath?.Invoke();
         }
     }
 }

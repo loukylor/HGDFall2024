@@ -17,8 +17,10 @@ namespace HGDFall2024.LevelElements
 
         public event Action OnDeath;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             gun = GetComponentInChildren<Gun>(true);
         }
 
@@ -27,8 +29,10 @@ namespace HGDFall2024.LevelElements
             gun.origin = transform.position;
         }
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
+            base.FixedUpdate();
+
             (GameObject player, float angle) = Helper.FindPlayer(transform.position, viewRadius, transform.right);
 
             if (player != null && state != EnemyState.Attacking)
@@ -85,15 +89,16 @@ namespace HGDFall2024.LevelElements
             }
         }
 
-        public void Kill()
+        protected override void OnDestroy()
         {
-            Destroy(gameObject);
+            base.OnDestroy();
+
             OnDeath?.Invoke();
         }
 
         public void OnDamaged(int damage)
         {
-            Kill();
+            Destroy(gameObject);
         }
 
         private enum EnemyState
