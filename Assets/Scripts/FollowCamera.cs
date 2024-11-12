@@ -18,9 +18,24 @@ namespace HGDFall2024
 
         private void FixedUpdate()
         {
-            // Lerp to object and let unity handle collisions
-            Vector2 diff = followObject.position - transform.position;
-            rb.velocity = diff * lerp / Time.fixedDeltaTime;
+            RaycastHit2D hit = Physics2D.Linecast(
+                followObject.position,
+                transform.position,
+                Physics2D.GetLayerCollisionMask(transform.gameObject.layer)
+            );
+
+            // Let's not lose line of sight of the player
+            if (hit.collider != null)
+            {
+                rb.position = hit.point;
+            }
+            else
+            {
+                // Lerp to object and let unity handle collisions
+                Vector2 diff = followObject.position - transform.position;
+                rb.velocity = diff * lerp / Time.fixedDeltaTime;
+            }
+
         }
     }
 }
