@@ -96,7 +96,6 @@ namespace HGDFall2024.Attachments
             Vector2 diff = MousePosition - (Vector2)connectedObject.transform.position;
             Vector2 velocity = diff * lerpSpeed / Time.fixedDeltaTime;
             connectedObject.AddForce(Vector2.ClampMagnitude(velocity, maxSpeed));
-            connectedObject.excludeLayers = LayerMask.GetMask("Player");
 
             lineRenderer.SetPosition(0, MousePosition);
             lineRenderer.SetPosition(1, connectedObject.transform.position);
@@ -105,11 +104,6 @@ namespace HGDFall2024.Attachments
 
         private void CheckHover()
         {
-            if (connectedObject != null)
-            {
-                connectedObject.excludeLayers = 0;
-            }
-
             lineRenderer.enabled = false;
             connectedObject = null;
 
