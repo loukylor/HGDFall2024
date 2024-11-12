@@ -27,7 +27,11 @@ namespace HGDFall2024.Attachments
         {
             base.Update();
 
-            transform.position = MousePosition;
+            transform.position = new Vector3(
+                MousePosition.x,
+                MousePosition.y,
+                -2
+            );
 
             // rotate blower to face player
             Vector2 diff = PlayerManager.Instance.Player.transform.position - transform.position;

@@ -9,6 +9,7 @@ namespace HGDFall2024
         public Vector2 origin;
         public float radius;
         public Vector2 direction;
+        public float zPos = 0;
 
         private new SpriteRenderer renderer;
         private Damager projectile;
@@ -22,8 +23,9 @@ namespace HGDFall2024
         private void Update()
         {
             float angle = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x);
+            Vector3 newPos = origin + (direction * radius);
             transform.SetPositionAndRotation(
-                origin + (direction * radius),
+                newPos + (Vector3.forward * zPos),
                 Quaternion.Euler(0, 0, angle)
             );
 
