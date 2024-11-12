@@ -4,7 +4,7 @@ namespace HGDFall2024
 {
     public static class Helper
     {
-        private static readonly Collider2D[] overlaps = new Collider2D[4];
+        private static readonly Collider2D[] overlaps = new Collider2D[10];
 
         public static (GameObject, float) FindPlayer(
             Vector2 origin, 
@@ -36,7 +36,7 @@ namespace HGDFall2024
                 RaycastHit2D los = Physics2D.Linecast(
                     origin,
                     overlaps[i].transform.position,
-                    LayerMask.GetMask("Default")
+                    LayerMask.GetMask("Default", "Pickupable")
                 );
                 if (los.collider != null)
                 {

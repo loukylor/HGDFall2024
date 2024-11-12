@@ -23,7 +23,7 @@ namespace HGDFall2024.LevelElements
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if ((layers.value & (1 << collision.gameObject.layer)) == 0)
+            if (!layers.IsSelected(collision.gameObject.layer))
             {
                 return;
             }
@@ -34,7 +34,7 @@ namespace HGDFall2024.LevelElements
             }
 
             RaycastHit2D hit = Physics2D.Linecast(
-                transform.position, 
+                transform.position + (transform.right * 0.3f), 
                 collision.transform.position, 
                 LayerMask.GetMask("Default", "Pickupable")
             );

@@ -233,11 +233,19 @@ PrefabInstance:
       value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 2087593026173843273, guid: 97c12f7052575e34fa81913946fcd0aa, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087593026173843273, guid: 97c12f7052575e34fa81913946fcd0aa, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4841584340503266974, guid: 97c12f7052575e34fa81913946fcd0aa, type: 3}
       propertyPath: speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841584340503266974, guid: 97c12f7052575e34fa81913946fcd0aa, type: 3}
+      propertyPath: lifetime
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9174626788882234655, guid: 97c12f7052575e34fa81913946fcd0aa, type: 3}
