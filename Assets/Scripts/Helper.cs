@@ -51,14 +51,12 @@ namespace HGDFall2024
                 float distance = Vector2.Distance(overlaps[i].transform.position, origin);
                 if (distance < closestDistance)
                 {
-                    Debug.Log(angle);
                     closest = overlaps[i].gameObject;
                     closestAngle = angle;
                     closestDistance = distance;
                 }
             }
 
-            Debug.Log(closestAngle);
             if (closest != null)
             {
                 return (closest, closestAngle);

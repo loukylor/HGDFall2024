@@ -7,6 +7,14 @@ namespace HGDFall2024.LevelElements
     {
         public static event Action OnLevelEnd;
 
-        private void OnTriggerEnter2D(Collider2D collision) => OnLevelEnd?.Invoke();
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!collision.gameObject.CompareTag("Player"))
+            {
+                return;
+            }
+
+            OnLevelEnd?.Invoke();
+        }
     }
 }

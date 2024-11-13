@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace HGDFall2024
+namespace HGDFall2024.UI
 {
     [RequireComponent(typeof(Collider2D))]
     public class MainMenuBalloonSpawner : MonoBehaviour
