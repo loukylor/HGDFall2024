@@ -57,6 +57,7 @@ namespace HGDFall2024.Managers
                 _currentLevel = scene.buildIndex - 2;
             }
 
+            StopAllCoroutines();
             switch (scene.buildIndex)
             {
                 case 0:
