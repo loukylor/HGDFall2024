@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ namespace HGDFall2024.Managers
 
             SceneManager.activeSceneChanged += OnSceneChange;
 
-            if (!Application.isEditor || SceneManager.loadedSceneCount == 1)
+            if (!Application.isEditor || SceneManager.sceneCount == 1)
             {
                 LoadIntro();
             }
@@ -27,6 +28,7 @@ namespace HGDFall2024.Managers
             switch (scene.buildIndex)
             {
                 case 0:
+                    StartCoroutine(IntroWaiter());
                     break;
                 case 1:
                     Button skipButton = GameObject.Find("Canvas").transform
@@ -39,6 +41,13 @@ namespace HGDFall2024.Managers
                 default:
                     break;
             }
+        }
+
+        private IEnumerator IntroWaiter()
+        {
+            yield return new WaitForSeconds(11.5f);
+
+            LoadMainMenu();
         }
 
         private void OnApplicationQuit()
