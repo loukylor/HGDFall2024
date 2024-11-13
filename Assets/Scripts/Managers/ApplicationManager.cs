@@ -99,6 +99,14 @@ namespace HGDFall2024.Managers
             LoadMainMenu();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.RightArrow) && _currentLevel != 0)
+            {
+                FinishLevel(_currentLevel);
+            }
+        }
+
         private void OnApplicationQuit()
         {
             HasQuit = true;
