@@ -10,7 +10,7 @@ namespace HGDFall2024.Managers
         public static ProgressManager Instance { get; private set; }
 
         public event Action<uint, uint> OnAvailableLevelsChanged;
-        private uint _availableLevels = 0;
+        private uint _availableLevels = 1;
         public uint AvailableLevels 
         { 
             get => _availableLevels; 
