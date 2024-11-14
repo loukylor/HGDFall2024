@@ -42,20 +42,14 @@ namespace HGDFall2024
             ContactPoint2D first = contacts[0];
             ContactPoint2D second = contacts[1];
 
-            // Only get crushed between static or dynamic rb's or colliders with
-            // no rbs
-            if (first.rigidbody == second.rigidbody
-                || (first.rigidbody != null 
-                && first.rigidbody.bodyType == RigidbodyType2D.Dynamic
-                && first.relativeVelocity.magnitude == 0
-                && second.rigidbody != null 
-                && second.rigidbody.bodyType == RigidbodyType2D.Dynamic
-                && second.relativeVelocity.magnitude == 0))
+            // Only get crushed between colliders with no rbs
+            if (first.rigidbody == second.rigidbody && first.rigidbody != null)
             {
                 return;
             }
 
-            if (Vector2.Distance(first.point, second.point) >= 0.5f)
+            float distance = Vector2.Distance(first.point, second.point);
+            if (distance < 0.2f || distance >= 0.5f)
             {
                 return;
             }
