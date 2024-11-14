@@ -45,7 +45,7 @@ namespace HGDFall2024.Attachments
                 return;
             }
 
-            if (!InputManager.Instance.Player.Click.IsPressed())
+            if (!InputManager.Instance.Player.Click.WasPressedThisFrame())
             {
                 renderer.sprite = blowerDefault;
             }
