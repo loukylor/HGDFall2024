@@ -20,8 +20,8 @@ namespace HGDFall2024.Attachments
         public Sprite blowerSqueeze;
 
         private float startBlowTime = 0;
-        private float targetAngle = 0;
-        private float currentAngle = 0;
+        private float targetAngle = 90;
+        private float currentAngle = 90;
         private new SpriteRenderer renderer;
 
         private void Awake()
