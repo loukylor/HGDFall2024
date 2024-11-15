@@ -1,16 +1,21 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HGDFall2024.LevelElements
 {
     public class Door : MonoBehaviour
     {
+        private static readonly ContactPoint2D[] contacts = new ContactPoint2D[3];
+
+        public bool IsOpen { get; private set; }
+
         public GameObject[] deathWatchers;
         public DoorTrigger[] triggers;
         public GameObject[] disableOnTrigger;
 
         public Vector2 destPos;
         public float openSpeed = 6;
+
+        private new Collider2D collider;
 
         private Vector2 originalPos;
         private Vector2 targetPos;
@@ -37,6 +42,8 @@ namespace HGDFall2024.LevelElements
 
         private void Start()
         {
+            collider = GetComponent<Collider2D>();
+
             Count = deathWatchers.Length + triggers.Length;
 
             foreach (DoorTrigger trigger in triggers)
@@ -67,6 +74,28 @@ namespace HGDFall2024.LevelElements
                 targetPos, 
                 openSpeed * Time.deltaTime
             );
+
+            if (collider != null && Vector2.Distance(transform.localPosition, targetPos) > 0.1)
+            {
+                int contactCount = collider.GetContacts(contacts);
+                for (int i = 0; i < contactCount; i++)
+                {
+                    if (contacts[i].collider.GetComponent<Pickupable>() == null)
+                    {
+                        continue;
+                    }
+
+                    if (IsOpen)
+                    {
+                        Open();
+                    }
+                    else
+                    {
+                        Close();
+                    }
+                    return;
+                }
+            }
         }
 
         public void Open()
@@ -76,6 +105,7 @@ namespace HGDFall2024.LevelElements
             {
                 disable.SetActive(false);
             }
+            IsOpen = true;
         }
 
         public void Close()
@@ -85,6 +115,7 @@ namespace HGDFall2024.LevelElements
             {
                 disable.SetActive(true);
             }
+            IsOpen = false;
         }
     }
 }

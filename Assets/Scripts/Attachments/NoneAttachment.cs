@@ -95,6 +95,10 @@ namespace HGDFall2024.Attachments
 
                 lineRenderer.enabled = false;
             }
+            else if (joint == null)
+            {
+                lineRenderer.enabled = false;
+            }
         }
 
         private void FixedUpdate()
