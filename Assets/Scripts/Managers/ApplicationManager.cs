@@ -69,26 +69,7 @@ namespace HGDFall2024.Managers
 
                     skipButton.onClick.AddListener(LoadMainMenu);
                     break;
-                case >= 3 and < 5:
-                    ProgressManager.Instance.AvailableAttachments = new Attachments.AttachmentType[]
-                    {
-                        Attachments.AttachmentType.None,
-                        Attachments.AttachmentType.Blower
-                    };
-                    break;
-                case 5:
-                    ProgressManager.Instance.AvailableAttachments = new Attachments.AttachmentType[]
-                    {
-                        Attachments.AttachmentType.None,
-                        Attachments.AttachmentType.Blower,
-                        Attachments.AttachmentType.Pistol
-                    };
-                    break;
                 default:
-                    ProgressManager.Instance.AvailableAttachments = new Attachments.AttachmentType[]
-                    {
-                        Attachments.AttachmentType.None
-                    };
                     break;
             }
         }

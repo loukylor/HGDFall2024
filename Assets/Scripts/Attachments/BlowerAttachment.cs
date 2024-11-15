@@ -8,7 +8,11 @@ namespace HGDFall2024.Attachments
     {
         public override AttachmentType Attachment { get; } = AttachmentType.Blower;
 
+        public float radius = 0.5f;
+        public float blowerRotSpeed = 720;
+
         public float blowerDelay = 0.75f;
+        public float rechargeDelay = 0.5f;
         public float blowerStrength = 1;
         public float maxStrength = 5;
 
@@ -16,6 +20,8 @@ namespace HGDFall2024.Attachments
         public Sprite blowerSqueeze;
 
         private float startBlowTime = 0;
+        private float targetAngle = 0;
+        private float currentAngle = 0;
         private new SpriteRenderer renderer;
 
         private void Awake()
@@ -23,43 +29,45 @@ namespace HGDFall2024.Attachments
             renderer = GetComponent<SpriteRenderer>();
         }
 
-        protected override void Update()
+        private void FixedUpdate()
         {
             base.Update();
 
-            transform.position = new Vector3(
-                MousePosition.x,
-                MousePosition.y,
-                -2
+            Vector2 input = InputManager.Instance.Player.Movement.ReadValue<Vector2>();
+            Vector2 direction = input.normalized;
+
+            if (input.magnitude > 0.125)
+            {
+                targetAngle = -Vector2.SignedAngle(direction, Vector2.right);
+            }
+
+            currentAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, blowerRotSpeed * Time.fixedDeltaTime);
+
+            Vector2 actualDirection = Vector2.right.Rotate(currentAngle);
+            transform.SetPositionAndRotation(
+                new Vector3(
+                    PlayerManager.Instance.Player.transform.position.x - (actualDirection.x * radius),
+                    PlayerManager.Instance.Player.transform.position.y - (actualDirection.y * radius),
+                    -2
+                ),
+                Quaternion.Euler(0, 0, currentAngle)
             );
 
-            // rotate blower to face player
-            Vector2 diff = PlayerManager.Instance.Player.transform.position - transform.position;
-            Vector2 direction = diff.normalized;
-            transform.eulerAngles = new Vector3(0, 0,
-                Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x)
-            );
-
-            if (Time.time - startBlowTime < blowerDelay)
+            float timeSinceBlow = Time.time - startBlowTime;
+            if (timeSinceBlow < blowerDelay)
             {
                 return;
             }
 
-            if (!InputManager.Instance.Player.Click.WasPressedThisFrame())
-            {
-                renderer.sprite = blowerDefault;
-            }
-            else
+            renderer.sprite = blowerDefault;
+            
+            if (input.magnitude >= 0.125 && timeSinceBlow >= blowerDelay + rechargeDelay)
             {
                 startBlowTime = Time.time;
                 renderer.sprite = blowerSqueeze;
 
-                // Make blow force inverse propertional to distance squared
-                float distance = diff.magnitude;
-                float falloff = Mathf.Clamp((-0.25f * distance) + 1, 0, 100);
-
-                Vector2 push = blowerStrength * falloff * direction;
-                PlayerManager.Instance.Player.Rb.velocity += Vector2.ClampMagnitude(push, maxStrength);
+                Vector2 push = Vector2.ClampMagnitude(blowerStrength * direction, maxStrength);
+                PlayerManager.Instance.Player.Rb.velocity += push;
             }
         }
     }

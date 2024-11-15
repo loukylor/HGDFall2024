@@ -1,7 +1,3 @@
-using HGDFall2024.Attachments;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,20 +8,20 @@ namespace HGDFall2024.Managers
         public static PlayerManager Instance { get; private set; }
 
         public Player Player { get; private set; }
-        public BaseAttachment CurrentAttachment { get; private set; }
+        //public BaseAttachment CurrentAttachment { get; private set; }
 
-        private Dictionary<AttachmentType, BaseAttachment> attachments;
+        //private Dictionary<AttachmentType, BaseAttachment> attachments;
 
         protected override void Awake()
         {
             base.Awake();
 
-            attachments = transform.GetComponentsInChildren<BaseAttachment>(true)
-                .ToDictionary(attachment => attachment.Attachment);
-            SetAttachment(AttachmentType.None);
+            //attachments = transform.GetComponentsInChildren<BaseAttachment>(true)
+            //    .ToDictionary(attachment => attachment.Attachment);
+            //SetAttachment(AttachmentType.None);
 
             SceneManager.activeSceneChanged += OnSceneChange;
-            ProgressManager.Instance.OnAvailableAttachmentsChanged += OnAvailableAttachmentsChanged;
+            //ProgressManager.Instance.OnAvailableAttachmentsChanged += OnAvailableAttachmentsChanged;
         }
 
 #if UNITY_EDITOR
@@ -44,7 +40,7 @@ namespace HGDFall2024.Managers
 
             base.OnDestroy();
             SceneManager.activeSceneChanged -= OnSceneChange;
-            ProgressManager.Instance.OnAvailableAttachmentsChanged -= OnAvailableAttachmentsChanged;
+            //ProgressManager.Instance.OnAvailableAttachmentsChanged -= OnAvailableAttachmentsChanged;
         }
 
         private void OnSceneChange(Scene oldScene, Scene newScene)
@@ -59,71 +55,71 @@ namespace HGDFall2024.Managers
             }
         }
 
-        private void OnAvailableAttachmentsChanged(AttachmentType[] oldAttachments, AttachmentType[] newAttachments)
-        {
-            if (CurrentAttachment == null && newAttachments.Contains(CurrentAttachment.Attachment)) 
-            {
-                return;
-            }
+        //private void OnAvailableAttachmentsChanged(AttachmentType[] oldAttachments, AttachmentType[] newAttachments)
+        //{
+        //    if (CurrentAttachment == null && newAttachments.Contains(CurrentAttachment.Attachment)) 
+        //    {
+        //        return;
+        //    }
 
-            Debug.LogWarning("Available attachments was changed to a value that doesn't include current attachment");
-            SetAttachment(AttachmentType.None);
-        }
+        //    Debug.LogWarning("Available attachments was changed to a value that doesn't include current attachment");
+        //    SetAttachment(AttachmentType.None);
+        //}
 
-        public void SetAttachment(AttachmentType attachment)
-        {
-            if (!Enum.IsDefined(typeof(AttachmentType), attachment))
-            {
-                throw new ArgumentException("Passed in invalid attachment: " + attachment);
-            }
+        //public void SetAttachment(AttachmentType attachment)
+        //{
+        //    if (!Enum.IsDefined(typeof(AttachmentType), attachment))
+        //    {
+        //        throw new ArgumentException("Passed in invalid attachment: " + attachment);
+        //    }
 
-            // Check if it is available
-            if (!ProgressManager.Instance.AvailableAttachments.Contains(attachment))
-            {
-                throw new ArgumentException("Attempted to set an attachment that is unavailable: " + attachment);
-            }
+        //    // Check if it is available
+        //    if (!ProgressManager.Instance.AvailableAttachments.Contains(attachment))
+        //    {
+        //        throw new ArgumentException("Attempted to set an attachment that is unavailable: " + attachment);
+        //    }
 
-            if (CurrentAttachment != null)
-            {
-                CurrentAttachment.gameObject.SetActive(false);
-            }
-            CurrentAttachment = attachments[attachment];
-            CurrentAttachment.gameObject.SetActive(true);
-        }
+        //    if (CurrentAttachment != null)
+        //    {
+        //        CurrentAttachment.gameObject.SetActive(false);
+        //    }
+        //    CurrentAttachment = attachments[attachment];
+        //    CurrentAttachment.gameObject.SetActive(true);
+        //}
 
-        public void NextAttachment()
-        {
-            if (ProgressManager.Instance.AvailableAttachments.Length == 0)
-            {
-                return;
-            }
-            else if (CurrentAttachment == null)
-            {
-                SetAttachment(ProgressManager.Instance.AvailableAttachments[0]);
-                return;
-            }
+        //public void NextAttachment()
+        //{
+        //    if (ProgressManager.Instance.AvailableAttachments.Length == 0)
+        //    {
+        //        return;
+        //    }
+        //    else if (CurrentAttachment == null)
+        //    {
+        //        SetAttachment(ProgressManager.Instance.AvailableAttachments[0]);
+        //        return;
+        //    }
 
-            AttachmentType[] available = ProgressManager.Instance.AvailableAttachments;
-            int index = 1 + Array.IndexOf(available, CurrentAttachment.Attachment);
-            index %= available.Length;
-            SetAttachment(available[index]);
-        }
+        //    AttachmentType[] available = ProgressManager.Instance.AvailableAttachments;
+        //    int index = 1 + Array.IndexOf(available, CurrentAttachment.Attachment);
+        //    index %= available.Length;
+        //    SetAttachment(available[index]);
+        //}
 
-        public void PreviousAttachment()
-        {
-            if (ProgressManager.Instance.AvailableAttachments.Length == 0)
-            {
-                return;
-            }
-            else if (CurrentAttachment == null)
-            {
-                SetAttachment(ProgressManager.Instance.AvailableAttachments[0]);
-                return;
-            }
+        //public void PreviousAttachment()
+        //{
+        //    if (ProgressManager.Instance.AvailableAttachments.Length == 0)
+        //    {
+        //        return;
+        //    }
+        //    else if (CurrentAttachment == null)
+        //    {
+        //        SetAttachment(ProgressManager.Instance.AvailableAttachments[0]);
+        //        return;
+        //    }
 
-            AttachmentType[] available = ProgressManager.Instance.AvailableAttachments;
-            int index = -1 + Array.IndexOf(available, CurrentAttachment.Attachment);
-            SetAttachment(index >= 0 ? available[index] : available[^1]);
-        }
+        //    AttachmentType[] available = ProgressManager.Instance.AvailableAttachments;
+        //    int index = -1 + Array.IndexOf(available, CurrentAttachment.Attachment);
+        //    SetAttachment(index >= 0 ? available[index] : available[^1]);
+        //}
     }
 }

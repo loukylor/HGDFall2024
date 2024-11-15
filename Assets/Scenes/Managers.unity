@@ -140,18 +140,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: None
       objectReference: {fileID: 0}
-    - target: {fileID: 1502176421727315988, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.053569794
-      objectReference: {fileID: 0}
-    - target: {fileID: 3396756454333446396, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
-      propertyPath: maxSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3396756454333446396, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
-      propertyPath: lerpSpeed
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 4088489898301910292, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -444,10 +432,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
-    - target: {fileID: 2087593026173843273, guid: 97c12f7052575e34fa81913946fcd0aa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -464,10 +448,6 @@ PrefabInstance:
     - target: {fileID: 1566059891193381375, guid: dfe1ca7bff3891b48afed2e57e18ac3e, type: 3}
       propertyPath: m_Name
       value: ZapGun
-      objectReference: {fileID: 0}
-    - target: {fileID: 1566059891193381375, guid: dfe1ca7bff3891b48afed2e57e18ac3e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6887165738376519011, guid: dfe1ca7bff3891b48afed2e57e18ac3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -525,10 +505,6 @@ PrefabInstance:
     - target: {fileID: 1455808812583808078, guid: d930d1e89c6b4514bab4798901fee5a0, type: 3}
       propertyPath: m_Name
       value: Blower
-      objectReference: {fileID: 0}
-    - target: {fileID: 1455808812583808078, guid: d930d1e89c6b4514bab4798901fee5a0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4351633618079047396, guid: d930d1e89c6b4514bab4798901fee5a0, type: 3}
       propertyPath: m_LocalPosition.x

@@ -14,18 +14,20 @@ namespace HGDFall2024.Attachments
         public Material outlineMaterial;
         public float outlineWidth = 0.05f;
         public Color outlineColor = Color.yellow;
-        public float lerpSpeed = 0.3f;
-        public float maxSpeed = 10;
+        public float distance = 0.1f;
+        public float jointDamping = 0;
+        public float jointFrequency = 1;
 
-        private Rigidbody2D connectedObject;
+        private SpringJoint2D joint;
         private GameObject hoverObject;
+
         private LineRenderer lineRenderer;
         private SpriteMask mask;
         private readonly SpriteRenderer[] renderers = new SpriteRenderer[8];
 
         private void Start()
         {
-            lineRenderer = GetComponentInChildren<LineRenderer>();
+            lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.startColor = outlineColor;
             lineRenderer.endColor = outlineColor;
             mask = GetComponent<SpriteMask>();
@@ -60,9 +62,9 @@ namespace HGDFall2024.Attachments
         {
             base.Update();
 
-            if (connectedObject != null)
+            if (joint != null)
             {
-                SetOutline(connectedObject.gameObject);
+                SetOutline(joint.transform.gameObject);
             }
             else
             {
@@ -71,15 +73,32 @@ namespace HGDFall2024.Attachments
 
             if (hoverObject != null 
                 && InputManager.Instance.Player.Click.WasPressedThisFrame() 
-                && connectedObject == null)
+                && joint == null)
             {
-                connectedObject = hoverObject.GetComponent<Rigidbody2D>();
+                joint = hoverObject.AddComponent<SpringJoint2D>();
+                joint.autoConfigureDistance = false;
+                joint.autoConfigureConnectedAnchor = false;
+                joint.distance = distance;
+                joint.dampingRatio = jointDamping;
+                joint.frequency = jointFrequency;
+                hoverObject = null;
+
+                UpdateLineRenderer();
+                lineRenderer.enabled = true;
+            }
+            else if (InputManager.Instance.Player.Click.WasReleasedThisFrame()
+                && joint != null)
+            {
+                Destroy(joint);
+                joint = null;
+
+                lineRenderer.enabled = false;
             }
         }
 
         private void FixedUpdate()
         {
-            if (InputManager.Instance.Player.Click.IsPressed() && connectedObject != null)
+            if (InputManager.Instance.Player.Click.IsPressed() && joint != null)
             {
                 WhileClicked();
             }
@@ -91,22 +110,12 @@ namespace HGDFall2024.Attachments
 
         private void WhileClicked()
         {
-            hoverObject = null;
-
-            Vector2 diff = MousePosition - (Vector2)connectedObject.transform.position;
-            Vector2 velocity = diff * lerpSpeed / Time.fixedDeltaTime;
-            connectedObject.AddForce(Vector2.ClampMagnitude(velocity, maxSpeed));
-
-            lineRenderer.SetPosition(0, MousePosition);
-            lineRenderer.SetPosition(1, connectedObject.transform.position);
-            lineRenderer.enabled = true;
+            UpdateLineRenderer();
+            joint.connectedAnchor = MousePosition;
         }
 
         private void CheckHover()
         {
-            lineRenderer.enabled = false;
-            connectedObject = null;
-
             int hitCount = Physics2D.RaycastNonAlloc(MousePosition, Vector2.zero, hits, 0);
             GameObject hit = null;
             for (int i = 0; i < hitCount; i++)
@@ -139,6 +148,12 @@ namespace HGDFall2024.Attachments
             {
                 renderer.sprite = sprite;
             }
+        }
+
+        private void UpdateLineRenderer()
+        {
+            lineRenderer.SetPosition(0, MousePosition);
+            lineRenderer.SetPosition(1, joint.transform.position);
         }
     }
 }

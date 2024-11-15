@@ -20,32 +20,32 @@ namespace HGDFall2024
             Rb = GetComponent<Rigidbody2D>();
         }
 
-        private void OnEnable()
-        {
-            InputManager.Instance.Player.CycleAttachmentBack.started += OnCycleAttachmentBack;
-            InputManager.Instance.Player.CycleAttachmentNext.started += OnCycleAttachmentNext;
-        }
+        //private void OnEnable()
+        //{
+        //    InputManager.Instance.Player.CycleAttachmentBack.started += OnCycleAttachmentBack;
+        //    InputManager.Instance.Player.CycleAttachmentNext.started += OnCycleAttachmentNext;
+        //}
 
-        private void OnDisable()
-        {
-            if (ApplicationManager.Instance.HasQuit)
-            {
-                return;
-            }
+        //private void OnDisable()
+        //{
+        //    if (ApplicationManager.Instance.HasQuit)
+        //    {
+        //        return;
+        //    }
 
-            InputManager.Instance.Player.CycleAttachmentBack.started -= OnCycleAttachmentBack;
-            InputManager.Instance.Player.CycleAttachmentNext.started -= OnCycleAttachmentNext;
-        }
+        //    InputManager.Instance.Player.CycleAttachmentBack.started -= OnCycleAttachmentBack;
+        //    InputManager.Instance.Player.CycleAttachmentNext.started -= OnCycleAttachmentNext;
+        //}
 
-        private void OnCycleAttachmentBack(InputAction.CallbackContext context)
-        {
-            PlayerManager.Instance.PreviousAttachment();
-        }
+        //private void OnCycleAttachmentBack(InputAction.CallbackContext context)
+        //{
+        //    PlayerManager.Instance.PreviousAttachment();
+        //}
 
-        private void OnCycleAttachmentNext(InputAction.CallbackContext context)
-        {
-            PlayerManager.Instance.NextAttachment();
-        }
+        //private void OnCycleAttachmentNext(InputAction.CallbackContext context)
+        //{
+        //    PlayerManager.Instance.NextAttachment();
+        //}
 
         protected override void OnDestroy()
         {
