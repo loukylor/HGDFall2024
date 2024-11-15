@@ -50,6 +50,11 @@ namespace HGDFall2024
         protected override void OnDestroy()
         {
             base.OnDestroy();
+
+            if (!gameObject.scene.isLoaded)
+            {
+                return;
+            }
          
             OnDeath?.Invoke();
         }

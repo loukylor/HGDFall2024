@@ -28,6 +28,11 @@ namespace HGDFall2024.Managers
         private void Start()
         {
             Player = GameObject.Find("Balloon").GetComponent<Player>();
+            Player.OnDeath += OnPlayerDeath;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
         }
 #endif
 
@@ -45,14 +50,35 @@ namespace HGDFall2024.Managers
 
         private void OnSceneChange(Scene oldScene, Scene newScene)
         {
+            if (newScene.buildIndex < 3)
+            {
+                return;
+            }
+
             foreach (GameObject go in newScene.GetRootGameObjects())
             {
                 if (go.CompareTag("Player"))
                 {
                     Player = go.GetComponent<Player>();
+                    Player.OnDeath += OnPlayerDeath;
+
+                    foreach (Transform child in transform)
+                    {
+                        child.gameObject.SetActive(true);
+                    }
                     break;
                 }
             }
+        }
+
+        private void OnPlayerDeath()
+        {
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+
+            ApplicationManager.Instance.ShowLevelEndScreen(true);
         }
 
         //private void OnAvailableAttachmentsChanged(AttachmentType[] oldAttachments, AttachmentType[] newAttachments)

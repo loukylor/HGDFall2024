@@ -18,6 +18,11 @@ namespace HGDFall2024
 
         private void FixedUpdate()
         {
+            if (followObject == null)
+            {
+                return;
+            }
+
             RaycastHit2D hit = Physics2D.Linecast(
                 followObject.position,
                 transform.position,

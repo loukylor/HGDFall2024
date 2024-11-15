@@ -34,6 +34,7 @@ namespace HGDFall2024
             // There really shoudln't be a lot of cases where we're colliding
             // with 3 things
             int contactCount = rb.GetContacts(contacts);
+
             if (contactCount != 2) 
             {
                 return;

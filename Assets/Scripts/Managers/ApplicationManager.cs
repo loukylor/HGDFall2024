@@ -39,7 +39,7 @@ namespace HGDFall2024.Managers
             LevelEndTrigger.OnLevelEnd += () =>
             {
                 Debug.Log("finish level: " + _currentLevel);
-                FinishLevel(_currentLevel);
+                ShowLevelEndScreen(false);
             };
         }
 
@@ -52,6 +52,8 @@ namespace HGDFall2024.Managers
 
         private void OnSceneChange(Scene _, Scene scene)
         {
+            HideLevelEndScreen();
+
             if (scene.buildIndex >= 3)
             {
                 _currentLevel = scene.buildIndex - 2;
@@ -100,6 +102,21 @@ namespace HGDFall2024.Managers
 
         public void LoadLevel(int level) => LoadScene(3 + level - 1);
 
+        public void ReloadLevel() => LoadLevel(_currentLevel);
+
+        public void ShowLevelEndScreen(bool died)
+        {
+            Transform screen = transform.GetChild(0);
+            Transform canvas = screen.Find("Canvas");
+            canvas.Find("Buttons/Next").gameObject.SetActive(!died);
+            canvas.Find("DeathText").gameObject.SetActive(died);
+            canvas.Find("FinishedText").gameObject.SetActive(!died);
+
+            screen.gameObject.SetActive(true);
+        }
+
+        public void HideLevelEndScreen() => transform.GetChild(0).gameObject.SetActive(false);
+
         private void LoadScene(int index)
         {
             Debug.Log("Loading scene: " + index);
@@ -115,5 +132,7 @@ namespace HGDFall2024.Managers
             }
             LoadLevel(level + 1);
         }
+
+        public void FinishLevel() => FinishLevel(_currentLevel);
     }
 }
