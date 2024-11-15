@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8711558178722610101}
   - component: {fileID: 766978750809861214}
   - component: {fileID: 7897988778257752487}
-  - component: {fileID: 496968792527290233}
+  - component: {fileID: 7342080112119170444}
   m_Layer: 0
   m_Name: PressurePlate
   m_TagString: Untagged
@@ -102,7 +102,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   targetTag: 
---- !u!61 &496968792527290233
+--- !u!61 &7342080112119170444
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,5 +145,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.96875, y: 4}
+  m_Size: {x: 2.6458333, y: 2.6666667}
   m_EdgeRadius: 0

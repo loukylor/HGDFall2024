@@ -76,6 +76,7 @@ namespace HGDFall2024.Attachments
                 && joint == null)
             {
                 joint = hoverObject.AddComponent<SpringJoint2D>();
+                joint.enableCollision = true;
                 joint.autoConfigureDistance = false;
                 joint.autoConfigureConnectedAnchor = false;
                 joint.distance = distance;
