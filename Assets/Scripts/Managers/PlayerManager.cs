@@ -82,7 +82,7 @@ namespace HGDFall2024.Managers
                 child.gameObject.SetActive(false);
             }
 
-            ApplicationManager.Instance.ShowLevelEndScreen(true);
+            ApplicationManager.Instance.ShowLevelMenu(ApplicationManager.LevelMenuState.Died);
         }
 
         //private void OnAvailableAttachmentsChanged(AttachmentType[] oldAttachments, AttachmentType[] newAttachments)

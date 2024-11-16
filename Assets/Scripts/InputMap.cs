@@ -73,6 +73,15 @@ namespace HGDFall2024
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""02d4d446-a6da-4cbb-9e72-0476a6400cd7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -240,6 +249,28 @@ namespace HGDFall2024
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01aae8a9-9902-46de-ac55-d399bbc8bba4"",
+                    ""path"": ""*/{Menu}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44fd82d6-0ba9-450e-bb82-b069dcfd2cd0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -253,6 +284,7 @@ namespace HGDFall2024
             m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
             m_Player_PointerPosition = m_Player.FindAction("PointerPosition", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+            m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -319,6 +351,7 @@ namespace HGDFall2024
         private readonly InputAction m_Player_Click;
         private readonly InputAction m_Player_PointerPosition;
         private readonly InputAction m_Player_Movement;
+        private readonly InputAction m_Player_Pause;
         public struct PlayerActions
         {
             private @InputMap m_Wrapper;
@@ -328,6 +361,7 @@ namespace HGDFall2024
             public InputAction @Click => m_Wrapper.m_Player_Click;
             public InputAction @PointerPosition => m_Wrapper.m_Player_PointerPosition;
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
+            public InputAction @Pause => m_Wrapper.m_Player_Pause;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -352,6 +386,9 @@ namespace HGDFall2024
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -371,6 +408,9 @@ namespace HGDFall2024
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -395,6 +435,7 @@ namespace HGDFall2024
             void OnClick(InputAction.CallbackContext context);
             void OnPointerPosition(InputAction.CallbackContext context);
             void OnMovement(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
     }
 }

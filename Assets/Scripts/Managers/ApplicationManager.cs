@@ -1,6 +1,7 @@
 ﻿using HGDFall2024.LevelElements;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,7 +13,8 @@ namespace HGDFall2024.Managers
 
         public bool HasQuit { get; private set; } = false;
 
-        private int _currentLevel;
+        private int currentLevel;
+        private bool menuOpen = false; 
 
         protected override void Awake()
         {
@@ -31,32 +33,35 @@ namespace HGDFall2024.Managers
                     Scene scene = SceneManager.GetSceneAt(i);
                     if (scene.buildIndex >= 3)
                     {
-                        _currentLevel = scene.buildIndex - 2;
+                        currentLevel = scene.buildIndex - 2;
                     }
                 }
             }
 
             LevelEndTrigger.OnLevelEnd += () =>
             {
-                Debug.Log("finish level: " + _currentLevel);
-                ShowLevelEndScreen(false);
+                Debug.Log("finish level: " + currentLevel);
+                ShowLevelMenu(LevelMenuState.LevelComplete);
             };
+
+            InputManager.Instance.Player.Pause.started += OnPause;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            LevelEndTrigger.OnLevelEnd -= () => FinishLevel(_currentLevel);
+            LevelEndTrigger.OnLevelEnd -= () => FinishLevel(currentLevel);
+            InputManager.Instance.Player.Pause.started -= OnPause;
         }
 
         private void OnSceneChange(Scene _, Scene scene)
         {
-            HideLevelEndScreen();
+            HideLevelMenu();
 
             if (scene.buildIndex >= 3)
             {
-                _currentLevel = scene.buildIndex - 2;
+                currentLevel = scene.buildIndex - 2;
             }
 
             StopAllCoroutines();
@@ -83,11 +88,15 @@ namespace HGDFall2024.Managers
             LoadMainMenu();
         }
 
-        private void Update()
+        private void OnPause(InputAction.CallbackContext _)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow) && _currentLevel != 0)
+            if (menuOpen)
             {
-                FinishLevel(_currentLevel);
+                HideLevelMenu();
+            }
+            else
+            {
+                ShowLevelMenu(LevelMenuState.Paused);
             }
         }
 
@@ -102,20 +111,28 @@ namespace HGDFall2024.Managers
 
         public void LoadLevel(int level) => LoadScene(3 + level - 1);
 
-        public void ReloadLevel() => LoadLevel(_currentLevel);
+        public void ReloadLevel() => LoadLevel(currentLevel);
 
-        public void ShowLevelEndScreen(bool died)
+        public void ShowLevelMenu(LevelMenuState state)
         {
             Transform screen = transform.GetChild(0);
             Transform canvas = screen.Find("Canvas");
-            canvas.Find("Buttons/Next").gameObject.SetActive(!died);
-            canvas.Find("DeathText").gameObject.SetActive(died);
-            canvas.Find("FinishedText").gameObject.SetActive(!died);
+            canvas.Find("Buttons/Next").gameObject.SetActive(state == LevelMenuState.LevelComplete);
+            canvas.Find("DeathText").gameObject.SetActive(state == LevelMenuState.Died);
+            canvas.Find("FinishedText").gameObject.SetActive(state == LevelMenuState.LevelComplete);
+            canvas.Find("PausedText").gameObject.SetActive(state == LevelMenuState.Paused);
+            Time.timeScale = state == LevelMenuState.Paused ? 0 : 1;
 
             screen.gameObject.SetActive(true);
+            menuOpen = true;
         }
 
-        public void HideLevelEndScreen() => transform.GetChild(0).gameObject.SetActive(false);
+        public void HideLevelMenu()
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            Time.timeScale = 1;
+            menuOpen = false;
+        }
 
         private void LoadScene(int index)
         {
@@ -133,6 +150,13 @@ namespace HGDFall2024.Managers
             LoadLevel(level + 1);
         }
 
-        public void FinishLevel() => FinishLevel(_currentLevel);
+        public void FinishLevel() => FinishLevel(currentLevel);
+
+        public enum LevelMenuState
+        {
+            Died,
+            LevelComplete,
+            Paused
+        }
     }
 }

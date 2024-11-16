@@ -101,7 +101,6 @@ namespace HGDFall2024.LevelElements
 
         public void Open()
         {
-            Debug.Log("open");
             targetPos = originalPos + destPos;
             foreach (GameObject disable in disableOnTrigger)
             {
@@ -112,7 +111,6 @@ namespace HGDFall2024.LevelElements
 
         public void Close()
         {
-            Debug.Log("close");
             targetPos = originalPos;
             foreach (GameObject disable in disableOnTrigger)
             {
