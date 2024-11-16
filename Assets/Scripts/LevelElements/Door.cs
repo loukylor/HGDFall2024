@@ -75,7 +75,8 @@ namespace HGDFall2024.LevelElements
                 openSpeed * Time.deltaTime
             );
 
-            if (collider != null && Vector2.Distance(transform.localPosition, targetPos) > 0.1)
+            if (collider != null 
+                && Vector2.Distance(transform.localPosition, targetPos) > 0.03)
             {
                 int contactCount = collider.GetContacts(contacts);
                 for (int i = 0; i < contactCount; i++)
@@ -87,11 +88,11 @@ namespace HGDFall2024.LevelElements
 
                     if (IsOpen)
                     {
-                        Open();
+                        Close();
                     }
                     else
                     {
-                        Close();
+                        Open();
                     }
                     return;
                 }
@@ -100,6 +101,7 @@ namespace HGDFall2024.LevelElements
 
         public void Open()
         {
+            Debug.Log("open");
             targetPos = originalPos + destPos;
             foreach (GameObject disable in disableOnTrigger)
             {
@@ -110,6 +112,7 @@ namespace HGDFall2024.LevelElements
 
         public void Close()
         {
+            Debug.Log("close");
             targetPos = originalPos;
             foreach (GameObject disable in disableOnTrigger)
             {
