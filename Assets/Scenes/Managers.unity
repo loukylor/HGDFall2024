@@ -1573,6 +1573,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2030612156}
     m_Modifications:
+    - target: {fileID: 733062440361083888, guid: d930d1e89c6b4514bab4798901fee5a0, type: 3}
+      propertyPath: blowerLength
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1455808812583808078, guid: d930d1e89c6b4514bab4798901fee5a0, type: 3}
       propertyPath: m_Name
       value: Blower

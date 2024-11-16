@@ -12,6 +12,7 @@ namespace HGDFall2024.Attachments
         public float blowerRotSpeed = 720;
 
         public float blowerDelay = 0.75f;
+        public float blowerLength = 0.1f;
         public float rechargeDelay = 0.5f;
         public float blowerStrength = 1;
         public float maxStrength = 5;
@@ -19,7 +20,8 @@ namespace HGDFall2024.Attachments
         public Sprite blowerDefault;
         public Sprite blowerSqueeze;
 
-        private float startBlowTime = 0;
+        private float startBlowTime = -100;
+        private bool inputLetGo = false;
         private float targetAngle = 90;
         private float currentAngle = 90;
         private new SpriteRenderer renderer;
@@ -53,21 +55,29 @@ namespace HGDFall2024.Attachments
                 Quaternion.Euler(0, 0, currentAngle)
             );
 
-            float timeSinceBlow = Time.time - startBlowTime;
-            if (timeSinceBlow < blowerDelay)
+            if (input.magnitude < 0.125)
             {
-                return;
+                inputLetGo = true;
             }
 
-            renderer.sprite = blowerDefault;
-            
-            if (input.magnitude >= 0.125 && timeSinceBlow >= blowerDelay + rechargeDelay)
+            float timeSinceBlow = Time.time - startBlowTime;
+            if (timeSinceBlow < blowerLength && !inputLetGo)
+            {
+                Vector2 push = Vector2.ClampMagnitude(2 * Time.fixedDeltaTime * blowerStrength * direction, maxStrength);
+                PlayerManager.Instance.Player.Rb.velocity += push;
+            }
+            else if (input.magnitude >= 0.125 && timeSinceBlow >= blowerDelay + rechargeDelay)
             {
                 startBlowTime = Time.time;
                 renderer.sprite = blowerSqueeze;
+                inputLetGo = false;
 
                 Vector2 push = Vector2.ClampMagnitude(blowerStrength * direction, maxStrength);
                 PlayerManager.Instance.Player.Rb.velocity += push;
+            }
+            else if (timeSinceBlow >= blowerDelay)
+            {
+                renderer.sprite = blowerDefault;
             }
         }
     }
