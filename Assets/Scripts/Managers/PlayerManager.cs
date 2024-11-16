@@ -56,6 +56,10 @@ namespace HGDFall2024.Managers
         {
             if (newScene.buildIndex < 3)
             {
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
                 return;
             }
 

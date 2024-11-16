@@ -3,6 +3,7 @@ using HGDFall2024.Managers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.SceneManagement;
 
 namespace HGDFall2024.Attachments
 {
@@ -81,9 +82,16 @@ namespace HGDFall2024.Attachments
             shape.radius = grabber.grabRadius;
 
             UpdateConstraint();
+
+            SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
-        private void OnEnable()
+        private void OnDestroy()
+        {
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+        }
+
+        private void OnSceneChanged(Scene _, Scene __)
         {
             if (PlayerManager.Instance.Player == null || circleConstraint == null)
             {
