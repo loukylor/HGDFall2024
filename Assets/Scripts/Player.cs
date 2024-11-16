@@ -1,8 +1,8 @@
-﻿using HGDFall2024.LevelElements;
+﻿using HGDFall2024.Attachments;
+using HGDFall2024.LevelElements;
 using HGDFall2024.Managers;
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace HGDFall2024
 {
@@ -18,6 +18,12 @@ namespace HGDFall2024
             base.Start();
 
             Rb = GetComponent<Rigidbody2D>();
+
+
+            ParticleSystem grabCircle = GetComponentInChildren<ParticleSystem>();
+            ParticleSystem.ShapeModule shape = grabCircle.shape;
+            NoneAttachment grabber = PlayerManager.Instance.Attachments[Attachments.AttachmentType.None] as NoneAttachment;
+            shape.radius = grabber.grabRadius;
         }
 
         //private void OnEnable()

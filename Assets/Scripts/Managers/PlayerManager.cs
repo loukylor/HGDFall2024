@@ -1,3 +1,6 @@
+using HGDFall2024.Attachments;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,14 +13,15 @@ namespace HGDFall2024.Managers
         public Player Player { get; private set; }
         //public BaseAttachment CurrentAttachment { get; private set; }
 
-        //private Dictionary<AttachmentType, BaseAttachment> attachments;
+        public IReadOnlyDictionary<AttachmentType, BaseAttachment> Attachments => attachments;
+        private Dictionary<AttachmentType, BaseAttachment> attachments;
 
         protected override void Awake()
         {
             base.Awake();
 
-            //attachments = transform.GetComponentsInChildren<BaseAttachment>(true)
-            //    .ToDictionary(attachment => attachment.Attachment);
+            attachments = transform.GetComponentsInChildren<BaseAttachment>(true)
+                .ToDictionary(attachment => attachment.Attachment);
             //SetAttachment(AttachmentType.None);
 
             SceneManager.activeSceneChanged += OnSceneChange;

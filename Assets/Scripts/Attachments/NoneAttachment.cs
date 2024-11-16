@@ -1,5 +1,6 @@
 ﻿using HGDFall2024.LevelElements;
 using HGDFall2024.Managers;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace HGDFall2024.Attachments
@@ -14,9 +15,13 @@ namespace HGDFall2024.Attachments
         public Material outlineMaterial;
         public float outlineWidth = 0.05f;
         public Color outlineColor = Color.yellow;
+
+        public float grabRadius = 10;
         public float distance = 0.1f;
         public float jointDamping = 0;
         public float jointFrequency = 1;
+
+        private Vector2 maxMousePosition;
 
         private SpringJoint2D joint;
         private GameObject hoverObject;
@@ -61,6 +66,8 @@ namespace HGDFall2024.Attachments
         protected override void Update()
         {
             base.Update();
+            Vector2 playerPos = PlayerManager.Instance.Player.transform.position;
+            maxMousePosition = playerPos + Vector2.ClampMagnitude(MousePosition - playerPos, grabRadius);
 
             if (joint != null)
             {
@@ -116,11 +123,17 @@ namespace HGDFall2024.Attachments
         private void WhileClicked()
         {
             UpdateLineRenderer();
-            joint.connectedAnchor = MousePosition;
+            joint.connectedAnchor = maxMousePosition;
         }
 
         private void CheckHover()
         {
+            if (maxMousePosition != MousePosition)
+            {
+                hoverObject = null;
+                return;
+            }
+
             int hitCount = Physics2D.RaycastNonAlloc(MousePosition, Vector2.zero, hits, 0);
             GameObject hit = null;
             for (int i = 0; i < hitCount; i++)
@@ -157,7 +170,7 @@ namespace HGDFall2024.Attachments
 
         private void UpdateLineRenderer()
         {
-            lineRenderer.SetPosition(0, MousePosition);
+            lineRenderer.SetPosition(0, maxMousePosition);
             lineRenderer.SetPosition(1, joint.transform.position);
         }
     }

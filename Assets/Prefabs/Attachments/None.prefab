@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4088489898301910292
 Transform:
   m_ObjectHideFlags: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   outlineMaterial: {fileID: 2100000, guid: b235b91771f452d4297ef501a9b9f042, type: 2}
   outlineWidth: 0.05
   outlineColor: {r: 0, g: 1, b: 0.12194967, a: 1}
+  grabRadius: 10
   distance: 0.5
   jointDamping: 0.5
   jointFrequency: 1.5
