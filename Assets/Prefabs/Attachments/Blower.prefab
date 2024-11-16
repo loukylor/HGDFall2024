@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3671b9018c45fc44397594e9501817f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.4
+  radius: 1.6
   blowerRotSpeed: 1440
   blowerDelay: 0.6
+  blowerLength: 0.3
   rechargeDelay: 0.4
   blowerStrength: 2.5
   maxStrength: 7

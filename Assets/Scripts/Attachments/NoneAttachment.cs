@@ -24,7 +24,8 @@ namespace HGDFall2024.Attachments
         private Vector2 maxMousePosition;
 
         private SpringJoint2D joint;
-        private GameObject hoverObject;
+        private float lastMass;
+        private Rigidbody2D hoverObject;
 
         private LineRenderer lineRenderer;
         private SpriteMask mask;
@@ -71,24 +72,31 @@ namespace HGDFall2024.Attachments
 
             if (joint != null)
             {
-                SetOutline(joint.transform.gameObject);
+                SetOutline(joint.gameObject);
+            }
+            else if (hoverObject != null)
+            {
+                SetOutline(hoverObject.gameObject);
             }
             else
             {
-                SetOutline(hoverObject);
+                SetOutline(null);
             }
 
             if (hoverObject != null 
                 && InputManager.Instance.Player.Click.WasPressedThisFrame() 
                 && joint == null)
             {
+                lastMass = hoverObject.mass;
+                hoverObject.mass /= 20;
+
                 joint = hoverObject.AddComponent<SpringJoint2D>();
                 joint.enableCollision = true;
                 joint.autoConfigureDistance = false;
                 joint.autoConfigureConnectedAnchor = false;
                 joint.distance = distance;
                 joint.dampingRatio = jointDamping;
-                joint.frequency = jointFrequency;
+                joint.frequency = jointFrequency / Mathf.Pow(lastMass, 0.25f);
                 hoverObject = null;
 
                 UpdateLineRenderer();
@@ -97,6 +105,7 @@ namespace HGDFall2024.Attachments
             else if (InputManager.Instance.Player.Click.WasReleasedThisFrame()
                 && joint != null)
             {
+                joint.attachedRigidbody.mass = lastMass;
                 Destroy(joint);
                 joint = null;
 
@@ -147,7 +156,7 @@ namespace HGDFall2024.Attachments
                 break;
             }
 
-            hoverObject = hit;
+            hoverObject = hit.GetComponent<Rigidbody2D>();
         }
 
         private void SetOutline(GameObject go)
