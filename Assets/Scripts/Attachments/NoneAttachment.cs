@@ -2,6 +2,7 @@
 using HGDFall2024.Managers;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace HGDFall2024.Attachments
 {
@@ -21,7 +22,13 @@ namespace HGDFall2024.Attachments
         public float jointDamping = 0;
         public float jointFrequency = 1;
 
+        public float circleShowRadius = 2;
+        public float alphaLerp = 3;
+        public float minAlpha;
+        public float maxAlpha;
+
         private Vector2 maxMousePosition;
+        private float mouseDistance;
 
         private SpringJoint2D joint;
         private float lastMass;
@@ -29,6 +36,9 @@ namespace HGDFall2024.Attachments
 
         private LineRenderer lineRenderer;
         private SpriteMask mask;
+        private Material grabCircleMaterial;
+        private float targetCircleAlpha = 0;
+        private PositionConstraint circleConstraint;
         private readonly SpriteRenderer[] renderers = new SpriteRenderer[8];
 
         private void Start()
@@ -38,6 +48,9 @@ namespace HGDFall2024.Attachments
             lineRenderer.endColor = outlineColor;
             mask = GetComponent<SpriteMask>();
 
+            ParticleSystem grabCircle = GetComponentInChildren<ParticleSystem>();
+            grabCircleMaterial = grabCircle.GetComponent<ParticleSystemRenderer>().material;
+            circleConstraint = grabCircle.GetComponent<PositionConstraint>();   
             // Creating a copy in 8 directions works so
             Vector2[] directions = new Vector2[8]
             {
@@ -62,13 +75,55 @@ namespace HGDFall2024.Attachments
                 renderer.color = outlineColor;
                 renderers[i] = renderer;
             }
+
+            ParticleSystem.ShapeModule shape = grabCircle.shape;
+            NoneAttachment grabber = PlayerManager.Instance.Attachments[AttachmentType.None] as NoneAttachment;
+            shape.radius = grabber.grabRadius;
+
+            UpdateConstraint();
+        }
+
+        private void OnEnable()
+        {
+            if (PlayerManager.Instance.Player == null || circleConstraint == null)
+            {
+                return;
+            }
+
+            UpdateConstraint();
+        }
+
+        private void UpdateConstraint()
+        {
+            circleConstraint.SetSource(
+                0,
+                new ConstraintSource()
+                {
+                    sourceTransform = PlayerManager.Instance.Player.transform,
+                    weight = 1
+                }
+            );
         }
 
         protected override void Update()
         {
             base.Update();
+
             Vector2 playerPos = PlayerManager.Instance.Player.transform.position;
+            mouseDistance = Vector2.Distance(playerPos, MousePosition);
             maxMousePosition = playerPos + Vector2.ClampMagnitude(MousePosition - playerPos, grabRadius);
+
+            float alpha = Mathf.MoveTowards(
+                grabCircleMaterial.color.a, 
+                targetCircleAlpha, 
+                alphaLerp * Time.deltaTime * (maxAlpha - minAlpha)
+            );
+            grabCircleMaterial.color = new Color(
+                grabCircleMaterial.color.r,
+                grabCircleMaterial.color.g,
+                grabCircleMaterial.color.b,
+                alpha
+            );
 
             if (joint != null)
             {
@@ -132,19 +187,23 @@ namespace HGDFall2024.Attachments
         private void WhileClicked()
         {
             UpdateLineRenderer();
+
+            if (mouseDistance > grabRadius - circleShowRadius)
+            {
+                targetCircleAlpha = maxAlpha;
+            }
+            else
+            {
+                targetCircleAlpha = minAlpha;
+            }
             joint.connectedAnchor = maxMousePosition;
         }
 
         private void CheckHover()
         {
-            if (maxMousePosition != MousePosition)
-            {
-                hoverObject = null;
-                return;
-            }
-
+            targetCircleAlpha = minAlpha;
             int hitCount = Physics2D.RaycastNonAlloc(MousePosition, Vector2.zero, hits, 0);
-            GameObject hit = null;
+            hoverObject = null;
             for (int i = 0; i < hitCount; i++)
             {
                 if (hits[i].collider.GetComponent<Pickupable>() == null)
@@ -152,11 +211,20 @@ namespace HGDFall2024.Attachments
                     continue;
                 }
 
-                hit = hits[i].collider.gameObject;
+                if (mouseDistance >= grabRadius - circleShowRadius)
+                {
+                    targetCircleAlpha = maxAlpha;
+
+                    if (mouseDistance >= grabRadius)
+                    {
+                        hoverObject = null;
+                        break;
+                    }
+                }
+           
+                hoverObject = hits[i].collider.gameObject.GetComponent<Rigidbody2D>();
                 break;
             }
-
-            hoverObject = hit.GetComponent<Rigidbody2D>();
         }
 
         private void SetOutline(GameObject go)
