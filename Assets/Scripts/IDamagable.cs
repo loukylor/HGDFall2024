@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace HGDFall2024.LevelElements
 {
@@ -6,6 +7,6 @@ namespace HGDFall2024.LevelElements
     {
         public event Action OnDeath;
 
-        public void OnDamaged(int damage);
+        public void OnDamaged(int damage, Collision2D collision);
     }
 }

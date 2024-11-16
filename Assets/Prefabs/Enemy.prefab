@@ -164,10 +164,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popAnim: {fileID: 6115657261991644189, guid: 6a96c817c0aa8e347a822659ef296b0c, type: 3}
+  disableAnim: 0
   viewRadius: 10
   fireInterval: 1.5
   searchTime: 3
   gunMoveSpeed: 150
+  hits: 1
+  armoredSprite: {fileID: -610080284, guid: ad7f9337dee1eac41afc5c8b5d9e8cf1, type: 3}
+  armoredMass: 15
+  armoredDrag: 2
+  invincibilityTime: 0.2
+  defaultSprite: {fileID: -2143498046, guid: ad7f9337dee1eac41afc5c8b5d9e8cf1, type: 3}
+  defaultMass: 3
+  defaultDrag: 1
+  popForce: 80
 --- !u!114 &2905040548408638921
 MonoBehaviour:
   m_ObjectHideFlags: 0

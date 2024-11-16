@@ -11,7 +11,7 @@ namespace HGDFall2024
         public GameObject popAnim;
         public bool disableAnim = false;
 
-        private Rigidbody2D rb;
+        protected Rigidbody2D rb;
 
         protected virtual void Start()
         {

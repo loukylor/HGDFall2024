@@ -14,15 +14,19 @@ namespace HGDFall2024.Attachments
         
         public override AttachmentType Attachment { get; } = AttachmentType.None;
 
+        [Header("Outline")]
         public Material outlineMaterial;
         public float outlineWidth = 0.05f;
         public Color outlineColor = Color.yellow;
 
+        [Header("Grab")]
         public float grabRadius = 10;
         public float distance = 0.1f;
         public float jointDamping = 0;
         public float jointFrequency = 1;
+        public Rigidbody2D HeldBody => joint != null ? joint.attachedRigidbody : null;
 
+        [Header("Grab Circle")]
         public float circleShowRadius = 2;
         public float alphaLerp = 3;
         public float minAlpha;
@@ -101,6 +105,13 @@ namespace HGDFall2024.Attachments
             UpdateConstraint();
         }
 
+        public void Drop()
+        {
+            joint.attachedRigidbody.mass = lastMass;
+            Destroy(joint);
+            joint = null;
+        }
+
         private void UpdateConstraint()
         {
             circleConstraint.SetSource(
@@ -168,9 +179,7 @@ namespace HGDFall2024.Attachments
             else if (InputManager.Instance.Player.Click.WasReleasedThisFrame()
                 && joint != null)
             {
-                joint.attachedRigidbody.mass = lastMass;
-                Destroy(joint);
-                joint = null;
+                Drop();
 
                 lineRenderer.enabled = false;
             }

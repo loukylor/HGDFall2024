@@ -57,7 +57,7 @@ namespace HGDFall2024
             OnDeath?.Invoke();
         }
 
-        public void OnDamaged(int damage)
+        public void OnDamaged(int damage, Collision2D collision)
         {
             //Destroy(gameObject);
         }
