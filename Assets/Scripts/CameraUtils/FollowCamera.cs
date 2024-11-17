@@ -3,6 +3,7 @@ using UnityEngine;
 namespace HGDFall2024.CameraUtils
 {
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(Camera))]
     public class FollowCamera : MonoBehaviour
     {
@@ -23,16 +24,13 @@ namespace HGDFall2024.CameraUtils
 
         private void FixedUpdate()
         {
-            cam.orthographicSize = Mathf.Lerp(
-                cam.orthographicSize, 
-                targetSize, 
-                lerp * Time.fixedDeltaTime * 10
-            );
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, lerp);
 
             if (followObject == null)
             {
                 return;
             }
+
 
             RaycastHit2D hit = Physics2D.Linecast(
                 followObject.position,
@@ -41,7 +39,7 @@ namespace HGDFall2024.CameraUtils
             );
 
             // Let's not lose line of sight of the player
-            if (hit.collider != null)
+            if (hit.rigidbody != null && hit.rigidbody != rb)
             {
                 rb.position = hit.point;
             }

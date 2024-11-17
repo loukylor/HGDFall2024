@@ -153,7 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followObject: {fileID: 0}
-  lerp: 0.5
+  targetSize: 0
+  lerp: 0.055
 --- !u!58 &1003175900255333642
 CircleCollider2D:
   m_ObjectHideFlags: 0
