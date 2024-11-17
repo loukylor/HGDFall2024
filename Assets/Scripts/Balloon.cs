@@ -20,7 +20,7 @@ namespace HGDFall2024
 
         protected virtual void OnDestroy()
         {
-            if (ApplicationManager.Instance.HasQuit || disableAnim || !gameObject.scene.isLoaded)
+            if (!gameObject.scene.isLoaded || ApplicationManager.Instance.HasQuit || disableAnim)
             {
                 return;
             }
