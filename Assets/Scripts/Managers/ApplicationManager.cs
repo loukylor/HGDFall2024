@@ -117,7 +117,10 @@ namespace HGDFall2024.Managers
         {
             Transform screen = transform.GetChild(0);
             Transform canvas = screen.Find("Canvas");
-            canvas.Find("Buttons/Next").gameObject.SetActive(state == LevelMenuState.LevelComplete);
+            canvas.Find("Buttons/Next").gameObject.SetActive(
+                state == LevelMenuState.LevelComplete 
+                && SceneManager.sceneCountInBuildSettings - 3 != currentLevel
+            );
             canvas.Find("DeathText").gameObject.SetActive(state == LevelMenuState.Died);
             canvas.Find("FinishedText").gameObject.SetActive(state == LevelMenuState.LevelComplete);
             canvas.Find("PausedText").gameObject.SetActive(state == LevelMenuState.Paused);
