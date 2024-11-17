@@ -316,6 +316,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: None
       objectReference: {fileID: 0}
+    - target: {fileID: 1776786301936983220, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
+      propertyPath: m_Sources.Array.data[0].sourceTransform
+      value: 
+      objectReference: {fileID: 2030612156}
     - target: {fileID: 4088489898301910292, guid: 09954ff36296b2c4f808f805091350fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
