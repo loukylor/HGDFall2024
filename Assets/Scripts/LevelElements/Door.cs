@@ -115,8 +115,11 @@ namespace HGDFall2024.LevelElements
         {
             targetPos = originalPos;
             foreach (GameObject disable in disableOnTrigger)
-            {
-                disable.SetActive(true);
+            { 
+                if (disable == null)
+                {
+                    disable.SetActive(true);
+                }
             }
             IsOpen = false;
         }
