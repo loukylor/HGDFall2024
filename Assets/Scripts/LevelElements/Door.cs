@@ -81,7 +81,9 @@ namespace HGDFall2024.LevelElements
                 int contactCount = collider.GetContacts(contacts);
                 for (int i = 0; i < contactCount; i++)
                 {
-                    if (contacts[i].collider.GetComponent<Pickupable>() == null)
+                    if (contacts[i].collider.GetComponent<Pickupable>() == null
+                        || contacts[i].rigidbody != null 
+                        || contacts[i].rigidbody.bodyType == RigidbodyType2D.Dynamic)
                     {
                         continue;
                     }

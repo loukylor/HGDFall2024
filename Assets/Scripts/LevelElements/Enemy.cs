@@ -65,7 +65,6 @@ namespace HGDFall2024.LevelElements
             {
                 gun.direction = ((Vector2)transform.right).Rotate(angle);
                 state = EnemyState.Attacking;
-                lastFired = Time.time;
             }
 
             if (gun.isActiveAndEnabled)
@@ -82,6 +81,7 @@ namespace HGDFall2024.LevelElements
             switch (state)
             {
                 case EnemyState.Waiting:
+                    lastFired = Time.time;
                     gun.gameObject.SetActive(false);
                     break;
                 case EnemyState.Searching:

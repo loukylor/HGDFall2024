@@ -44,7 +44,7 @@ namespace HGDFall2024
             ContactPoint2D second = contacts[1];
 
             // Only get crushed between colliders with no rbs
-            if (first.rigidbody == second.rigidbody && first.rigidbody != null)
+            if (first.rigidbody != null || second.rigidbody != null)
             {
                 return;
             }
