@@ -29,7 +29,7 @@ namespace HGDFall2024.LevelElements
         private float lastHitTime = 0;
         private new SpriteRenderer renderer;
         private float lastSpotted = 0;
-        private float lastFired = 0;
+        private float lastFired;
         private Gun gun;
         private EnemyState state = EnemyState.Waiting;
 
@@ -41,6 +41,7 @@ namespace HGDFall2024.LevelElements
             
             gun = GetComponentInChildren<Gun>(true);
             renderer = GetComponent<SpriteRenderer>();
+            lastFired = Time.time;
 
             SetHitState();
         }
