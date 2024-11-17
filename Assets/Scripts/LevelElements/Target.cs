@@ -13,7 +13,12 @@ namespace HGDFall2024.LevelElements
 
         public void OnDamaged(int damage, Collision2D collision)
         {
-            GetComponent<SpriteRenderer>().sprite = deadSprite;
+            SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+            if (renderer.sprite == deadSprite)
+            {
+                return;
+            }
+            renderer.sprite = deadSprite;
             OnDeath?.Invoke();
         }
     }

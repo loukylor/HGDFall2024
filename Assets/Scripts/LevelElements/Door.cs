@@ -108,7 +108,7 @@ namespace HGDFall2024.LevelElements
             targetPos = originalPos + destPos;
             foreach (GameObject disable in disableOnTrigger)
             {
-                if (disable == null)
+                if (disable != null)
                 {
                     disable.SetActive(false);
                 }
@@ -121,7 +121,7 @@ namespace HGDFall2024.LevelElements
             targetPos = originalPos;
             foreach (GameObject disable in disableOnTrigger)
             { 
-                if (disable == null)
+                if (disable != null)
                 {
                     disable.SetActive(true);
                 }
