@@ -59,7 +59,7 @@ namespace HGDFall2024
 
         public void OnDamaged(int damage, Collision2D collision)
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }
