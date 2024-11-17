@@ -69,11 +69,13 @@ namespace HGDFall2024.LevelElements
 
         private void Update()
         {
-            transform.localPosition = Vector2.MoveTowards(
+            Vector3 pos = Vector2.MoveTowards(
                 transform.localPosition, 
                 targetPos, 
                 openSpeed * Time.deltaTime
             );
+            pos.z = -2;
+            transform.localPosition = pos;
 
             if (collider != null 
                 && Vector2.Distance(transform.localPosition, targetPos) > 0.03)
@@ -106,7 +108,10 @@ namespace HGDFall2024.LevelElements
             targetPos = originalPos + destPos;
             foreach (GameObject disable in disableOnTrigger)
             {
-                disable.SetActive(false);
+                if (disable == null)
+                {
+                    disable.SetActive(false);
+                }
             }
             IsOpen = true;
         }
