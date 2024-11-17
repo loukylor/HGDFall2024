@@ -148,6 +148,13 @@ namespace HGDFall2024.LevelElements
                 collision.otherRigidbody.AddForce(normal * popForce);
             }
             rb.AddForce(normal * -popForce);
+
+
+            NoneAttachment grabber = PlayerManager.Instance.Attachments[AttachmentType.None] as NoneAttachment;
+            if (grabber.HeldBody == rb || grabber.HeldBody == collision.otherRigidbody)
+            {
+                grabber.Drop();
+            }
         }
 
         private void SetHitState()
@@ -157,12 +164,6 @@ namespace HGDFall2024.LevelElements
                 renderer.sprite = defaultSprite;
                 rb.mass = defaultMass;
                 rb.drag = defaultDrag;
-
-                NoneAttachment grabber = PlayerManager.Instance.Attachments[AttachmentType.None] as NoneAttachment;
-                if (grabber.HeldBody == rb)
-                {
-                    grabber.Drop();
-                }
             }
             else if (hits == 2) 
             {

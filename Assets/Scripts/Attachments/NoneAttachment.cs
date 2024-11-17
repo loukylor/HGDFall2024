@@ -107,6 +107,10 @@ namespace HGDFall2024.Attachments
 
         public void Drop()
         {
+            if (joint == null)
+            {
+                return;
+            }
             joint.attachedRigidbody.mass = lastMass;
             Destroy(joint);
             joint = null;
