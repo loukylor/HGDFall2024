@@ -54,7 +54,8 @@ namespace HGDFall2024.UI
                 {
                     GameObject newButton = Instantiate(template, buttons);
                     newButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = i.ToString();
-                    newButton.GetComponent<Button>().onClick.AddListener(() => LoadLevel(i));
+                    int level = i;
+                    newButton.GetComponent<Button>().onClick.AddListener(() => LoadLevel(level));
                 }
             }
 
