@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace HGDFall2024
+namespace HGDFall2024.Audio
 {
     [RequireComponent(typeof(AudioSource))]
     public class RandomAudioSource : MonoBehaviour
@@ -10,6 +9,8 @@ namespace HGDFall2024
 
         public float randomDelayMin = 0;
         public float randomDelayMax = 0;
+
+        public AudioSource AudioSource => audioSource;
 
         private AudioSource audioSource;
 
@@ -23,15 +24,15 @@ namespace HGDFall2024
             }
         }
 
-        public void Play()
+        public void Play(float delay = 0)
         {
             audioSource.clip = clips[Random.Range(0, clips.Length)];
-            audioSource.Play();
+            audioSource.PlayDelayed(delay);
         }
 
-        public void Play(float delay)
+        public void Play(AudioClip clip, float delay = 0)
         {
-            audioSource.clip = clips[Random.Range(0, clips.Length)];
+            audioSource.clip = clip;
             audioSource.PlayDelayed(delay);
         }
     }
