@@ -19,6 +19,9 @@ namespace HGDFall2024.LevelElements
             ParticleSystem.MainModule main = particle.main;
             main.startSpeed = force * 10;
             main.startLifetime = length / (7 * force);
+
+            AudioSource source = GetComponent<AudioSource>();
+            source.PlayDelayed(Random.Range(0, 1));
         }
 
         private void OnTriggerStay2D(Collider2D collision)

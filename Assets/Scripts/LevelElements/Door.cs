@@ -67,6 +67,7 @@ namespace HGDFall2024.LevelElements
             targetPos = transform.localPosition;
         }
 
+        // TODO: place crushing code in here
         private void Update()
         {
             Vector3 pos = Vector2.MoveTowards(

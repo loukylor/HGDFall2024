@@ -4,6 +4,7 @@ using UnityEngine;
 namespace HGDFall2024.Attachments
 {
     [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(RandomAudioSource))]
     public class BlowerAttachment : BaseAttachment
     {
         public override AttachmentType Attachment { get; } = AttachmentType.Blower;
@@ -25,10 +26,12 @@ namespace HGDFall2024.Attachments
         private float targetAngle = 90;
         private float currentAngle = 90;
         private new SpriteRenderer renderer;
+        private RandomAudioSource source;
 
         private void Awake()
         {
             renderer = GetComponent<SpriteRenderer>();
+            source = GetComponent<RandomAudioSource>();
         }
 
         private void FixedUpdate()
@@ -68,6 +71,7 @@ namespace HGDFall2024.Attachments
             }
             else if (input.magnitude >= 0.125 && timeSinceBlow >= blowerDelay + rechargeDelay)
             {
+                source.Play();
                 startBlowTime = Time.time;
                 renderer.sprite = blowerSqueeze;
                 inputLetGo = false;
