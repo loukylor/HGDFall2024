@@ -230,6 +230,12 @@ MonoBehaviour:
   clips:
   - clip: {fileID: 8300000, guid: 53fbd10e01140b94499e06e85a2c78dd, type: 3}
     weight: 1
+  - clip: {fileID: 8300000, guid: fc534f67167bf4a4699d06dad58e6885, type: 3}
+    weight: 10
+  - clip: {fileID: 8300000, guid: 966df71746824d9419a08a56eb8ca202, type: 3}
+    weight: 10
+  - clip: {fileID: 8300000, guid: 870b1262fb3d7424fbe4ddf0b5c82724, type: 3}
+    weight: 10
   randomDelayMin: 0
   randomDelayMax: 0
 --- !u!1 &2792884556834068139
