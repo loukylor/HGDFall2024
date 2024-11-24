@@ -186,8 +186,9 @@ MonoBehaviour:
   toSearchingSource: {fileID: 636632453763179939}
   lostSource: {fileID: 890310660370817091}
   attackingSource: {fileID: 7915434187672882742}
-  voiceLineDelayMin: 4
-  voiceLineDelayMax: 6
+  voiceLineDelayMin: 2
+  voiceLineDelayMax: 10
+  globalVoiceLineDelay: 2
 --- !u!114 &2905040548408638921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +251,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1e904205a18742b49af76ec79bd88296, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.516
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -259,9 +260,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 15
+  MaxDistance: 22
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -401,7 +402,7 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 51490e5584f244c439b5b9474e1c685b, type: 3}
     weight: 1
   - clip: {fileID: 0}
-    weight: 50
+    weight: 100
   randomDelayMin: 0
   randomDelayMax: 0
 --- !u!114 &4559450515650681418
