@@ -1,4 +1,5 @@
-﻿using HGDFall2024.Projectiles;
+﻿using HGDFall2024.Audio;
+using HGDFall2024.Projectiles;
 using UnityEngine;
 
 namespace HGDFall2024
@@ -13,11 +14,13 @@ namespace HGDFall2024
 
         private new SpriteRenderer renderer;
         private Damager projectile;
+        private RandomAudioSource source;
 
         private void Start()
         {
             renderer = GetComponent<SpriteRenderer>();
             projectile = GetComponentInChildren<Damager>(true);
+            source = GetComponent<RandomAudioSource>();
         }
 
         private void Update()
@@ -40,6 +43,10 @@ namespace HGDFall2024
                 transform.rotation
             );
             newProjectile.SetActive(true);
+            if (source != null)
+            {
+                source.Play();
+            }
         }
     }
 }

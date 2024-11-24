@@ -317,9 +317,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 50305f84aa1335c4ab89ceeaa2656429, type: 3}
-  - {fileID: 8300000, guid: 2c35e113cb89ae44a8ca83a1ec10ab12, type: 3}
-  - {fileID: 8300000, guid: 2c35e113cb89ae44a8ca83a1ec10ab12, type: 3}
-  - {fileID: 8300000, guid: 109cff541addff04ca3be3ff0b75b5ae, type: 3}
+  - clip: {fileID: 8300000, guid: 50305f84aa1335c4ab89ceeaa2656429, type: 3}
+    weight: 1
+  - clip: {fileID: 8300000, guid: 2c35e113cb89ae44a8ca83a1ec10ab12, type: 3}
+    weight: 1
+  - clip: {fileID: 8300000, guid: cc1e6e7e23abebc4797c5dacc11e7d04, type: 3}
+    weight: 1
+  - clip: {fileID: 8300000, guid: 109cff541addff04ca3be3ff0b75b5ae, type: 3}
+    weight: 1
   randomDelayMin: 0
   randomDelayMax: 0

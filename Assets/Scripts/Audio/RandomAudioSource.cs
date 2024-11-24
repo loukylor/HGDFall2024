@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace HGDFall2024.Audio
 {
     [RequireComponent(typeof(AudioSource))]
     public class RandomAudioSource : MonoBehaviour
     {
-        public AudioClip[] clips;
+        public WeightedClip[] clips;
 
         public float randomDelayMin = 0;
         public float randomDelayMax = 0;
@@ -26,14 +29,33 @@ namespace HGDFall2024.Audio
 
         public void Play(float delay = 0)
         {
-            source.clip = clips[Random.Range(0, clips.Length)];
-            source.PlayDelayed(delay);
+            int total = clips.Sum(clip => clip.weight);
+            int randVal = Random.Range(0, total);
+            int val = 0;
+            for (int i = 0; i < clips.Length; i++)
+            {
+                val += clips[i].weight;
+                if (val > randVal)
+                {
+                    source.clip = clips[i].clip;
+                    source.PlayDelayed(delay);
+                    return;
+                }
+            }
+
         }
 
         public void Play(AudioClip clip, float delay = 0)
         {
             source.clip = clip;
             source.PlayDelayed(delay);
+        }
+
+        [Serializable]
+        public class WeightedClip
+        {
+            public AudioClip clip;
+            public int weight = 1;
         }
     }
 }
