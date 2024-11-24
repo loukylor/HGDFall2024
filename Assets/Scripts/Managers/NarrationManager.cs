@@ -1,5 +1,6 @@
 ﻿using HGDFall2024.Audio;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace HGDFall2024.Managers
@@ -14,6 +15,7 @@ namespace HGDFall2024.Managers
         private readonly int hideStateHash = Animator.StringToHash("Hide");
         private Animator animator;
         private Rigidbody2D rb;
+        private TextMeshProUGUI subtitle;
 
         private Coroutine coroutine;
 
@@ -23,6 +25,7 @@ namespace HGDFall2024.Managers
 
             animator = GetComponentInChildren<Animator>(true);
             rb = GetComponent<Rigidbody2D>();
+            subtitle = GetComponentInChildren<TextMeshProUGUI>(true);
         }
 
         private void FixedUpdate()
@@ -61,12 +64,18 @@ namespace HGDFall2024.Managers
 
             animator.gameObject.SetActive(true);
             animator.Play(startStateHash);
+            if (source.subtitle != "")
+            {
+                subtitle.text = source.subtitle;
+                subtitle.gameObject.SetActive(true);
+            }
 
             yield return new WaitForSeconds(source.source.clip.length);
 
             animator.Play(hideStateHash);
             yield return new WaitForSeconds(0.7f);
             animator.gameObject.SetActive(false);
+            subtitle.gameObject.SetActive(false);
 
             coroutine = null;
         }

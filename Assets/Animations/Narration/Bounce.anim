@@ -70,7 +70,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Root/Mask/Balloon
+    path: Balloon/Mask/Balloon
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -83,7 +83,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2071339042
+      path: 3379921488
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
@@ -166,7 +166,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Root/Mask/Balloon
+    path: Balloon/Mask/Balloon
     classID: 224
     script: {fileID: 0}
     flags: 0

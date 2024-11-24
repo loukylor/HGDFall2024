@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace HGDFall2024.Audio
 {
@@ -6,31 +7,34 @@ namespace HGDFall2024.Audio
     public class TriggeredAudioSource : MonoBehaviour
     {
         public AudioSource source;
+        public string targetTag = "Narration";
 
         public AudioClip[] regularClips;
         public AudioClip[] interruptClips;
         public bool playOnce = true;
         public float delay = 0;
 
+        public string subtitle;
+
         public bool HasPlayed { get; private set; } = false;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (HasPlayed)
+            if (HasPlayed || !collision.gameObject.CompareTag(targetTag))
             {
                 return;
             }
-            HasPlayed = true;
+            StartCoroutine(SetHasPlayed());
             Play();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (HasPlayed)
+            if (HasPlayed || !collision.gameObject.CompareTag(targetTag))
             {
                 return;
             }
-            HasPlayed = true;
+            StartCoroutine(SetHasPlayed());
             Play();
         }
 
@@ -38,6 +42,7 @@ namespace HGDFall2024.Audio
         {
             if (interruptClips != null && interruptClips.Length > 0 && source.isPlaying)
             {
+                source.Stop();
                 source.clip = interruptClips[Random.Range(0, interruptClips.Length)];
             }
             else
@@ -45,6 +50,12 @@ namespace HGDFall2024.Audio
                 source.clip = regularClips[Random.Range(0, regularClips.Length)];
             }
             source.PlayDelayed(delay);
+        }
+
+        private IEnumerator SetHasPlayed()
+        {
+            yield return null;
+            HasPlayed = true;
         }
     }
 }
