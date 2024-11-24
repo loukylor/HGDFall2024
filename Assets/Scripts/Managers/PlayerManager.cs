@@ -31,7 +31,7 @@ namespace HGDFall2024.Managers
 #if UNITY_EDITOR
         private void Start()
         {
-            Player = GameObject.Find("Balloon").GetComponent<Player>();
+            Player = GameObject.Find("Balloon").GetComponentInChildren<Player>(true);
             Player.OnDeath += OnPlayerDeath;
             foreach (Transform child in transform)
             {
