@@ -8,7 +8,7 @@ namespace HGDFall2024.Managers
     [RequireComponent(typeof(Collider2D))]
     public class NarrationManager : BaseManager
     {
-        public static ApplicationManager Instance { get; private set; }
+        public static NarrationManager Instance { get; private set; }
 
         private readonly int startStateHash = Animator.StringToHash("Start");
         private readonly int hideStateHash = Animator.StringToHash("Hide");
@@ -19,12 +19,19 @@ namespace HGDFall2024.Managers
 
         protected override void Awake()
         {
+            base.Awake();
+
             animator = GetComponentInChildren<Animator>(true);
             rb = GetComponent<Rigidbody2D>();
         }
 
         private void FixedUpdate()
         {
+            if (PlayerManager.Instance.Player == null)
+            {
+                return;
+            }
+
             Vector2 playerPos = PlayerManager.Instance.Player.transform.position;
             rb.position = playerPos;
         }

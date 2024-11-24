@@ -25,6 +25,7 @@ namespace HGDFall2024.Attachments
         public float jointDamping = 0;
         public float jointFrequency = 1;
         public Rigidbody2D HeldBody => joint != null ? joint.attachedRigidbody : null;
+        public Vector2 JointPos => joint.connectedAnchor;
 
         [Header("Grab Circle")]
         public float circleShowRadius = 2;

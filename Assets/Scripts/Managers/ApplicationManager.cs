@@ -51,6 +51,11 @@ namespace HGDFall2024.Managers
         {
             base.OnDestroy();
 
+            if (HasQuit)
+            {
+                return;
+            }
+
             LevelEndTrigger.OnLevelEnd -= () => FinishLevel(currentLevel);
             InputManager.Instance.Player.Pause.started -= OnPause;
         }
