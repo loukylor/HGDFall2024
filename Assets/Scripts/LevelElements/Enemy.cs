@@ -37,6 +37,7 @@ namespace HGDFall2024.LevelElements
         public RandomAudioSource attackingSource;
         public float voiceLineDelayMin;
         public float voiceLineDelayMax;
+        public float globalVoiceLineDelay = 0.5f;
 
         private float lastHitTime = 0;
         private new SpriteRenderer renderer;
@@ -46,6 +47,8 @@ namespace HGDFall2024.LevelElements
         private EnemyState state = EnemyState.Waiting;
         private float lastVoiceLine;
         private float voiceLineWait;
+
+        private static float lastGlobalVoiceLine;
 
         public event Action OnDeath;
 
@@ -128,7 +131,7 @@ namespace HGDFall2024.LevelElements
                     lastSpotted = Time.time;
                     TryVoiceLine(attackingSource);
 
-                    if (Time.time - lastFired < fireInterval && MathF.Abs(currentAngle - angle) < 5)
+                    if (Time.time - lastFired < fireInterval || MathF.Abs(currentAngle - angle) > 5)
                     {
                         break;
                     }
@@ -209,9 +212,22 @@ namespace HGDFall2024.LevelElements
             {
                 voiceLineWait = UnityEngine.Random.Range(voiceLineDelayMin, voiceLineDelayMax);
                 lastVoiceLine = Time.time;
-                if (source != null && (!source.Source.isPlaying || bypassWait))
+
+                float dist = Vector2.Distance(Camera.main.transform.position, transform.position);
+                if (source != null
+                    && dist <= source.Source.maxDistance
+                    && (!source.Source.isPlaying || bypassWait))
                 {
+                    if (Time.time - lastGlobalVoiceLine <= globalVoiceLineDelay)
+                    {
+                        return false;
+                    }
+
                     source.Play();
+                    if (source.Source.clip != null)
+                    {
+                        lastGlobalVoiceLine = Time.time;
+                    }
                 }
                 return true;
             }

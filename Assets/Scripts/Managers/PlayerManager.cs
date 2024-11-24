@@ -11,6 +11,7 @@ namespace HGDFall2024.Managers
         public static PlayerManager Instance { get; private set; }
 
         public Player Player { get; private set; }
+        public AudioListener Listener { get; private set; }
         //public BaseAttachment CurrentAttachment { get; private set; }
 
         public IReadOnlyDictionary<AttachmentType, BaseAttachment> Attachments => attachments;
@@ -31,7 +32,9 @@ namespace HGDFall2024.Managers
 #if UNITY_EDITOR
         private void Start()
         {
-            Player = GameObject.Find("Balloon").GetComponentInChildren<Player>(true);
+            GameObject balloon = GameObject.Find("Balloon");
+            Player = balloon.GetComponentInChildren<Player>(true);
+            Listener = balloon.GetComponentInChildren<AudioListener>(true);
             Player.OnDeath += OnPlayerDeath;
             foreach (Transform child in transform)
             {
@@ -67,7 +70,8 @@ namespace HGDFall2024.Managers
             {
                 if (go.CompareTag("Player"))
                 {
-                    Player = go.GetComponent<Player>();
+                    Player = go.GetComponentInChildren<Player>();
+                    Listener = go.GetComponentInChildren<AudioListener>(true);
                     Player.OnDeath += OnPlayerDeath;
 
                     foreach (Transform child in transform)
