@@ -1,4 +1,5 @@
 ﻿using HGDFall2024.Attachments;
+using HGDFall2024.Audio;
 using HGDFall2024.Managers;
 using System;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace HGDFall2024.LevelElements
         public float viewRadius = 10;
         public float fireInterval = 1;
         public float searchTime = 5;
+        public float lostTime = 1;
         public float gunMoveSpeed = 60;
 
         [Header("Hits")]
@@ -26,12 +28,24 @@ namespace HGDFall2024.LevelElements
         public float defaultDrag = 0.5f;
         public float popForce = 10;
 
+        [Header("Voicelines")]
+        public RandomAudioSource waitingSource;
+        public RandomAudioSource spottedSource;
+        public RandomAudioSource searchingSource;
+        public RandomAudioSource toSearchingSource;
+        public RandomAudioSource lostSource;
+        public RandomAudioSource attackingSource;
+        public float voiceLineDelayMin;
+        public float voiceLineDelayMax;
+
         private float lastHitTime = 0;
         private new SpriteRenderer renderer;
         private float lastSpotted = 0;
         private float lastFired;
         private Gun gun;
         private EnemyState state = EnemyState.Waiting;
+        private float lastVoiceLine;
+        private float voiceLineWait;
 
         public event Action OnDeath;
 
@@ -66,14 +80,15 @@ namespace HGDFall2024.LevelElements
             {
                 gun.direction = ((Vector2)transform.right).Rotate(angle);
                 state = EnemyState.Attacking;
+                TryVoiceLine(spottedSource, true);
             }
 
-            if (gun.isActiveAndEnabled)
+            float currentAngle = Vector2.SignedAngle(transform.right, gun.direction);
+            if (gun.isActiveAndEnabled && player != null)
             {
-                float currentAngle = Vector2.SignedAngle(transform.right, gun.direction);
                 float nextAngle = Mathf.MoveTowardsAngle(
                     currentAngle,
-                    player == null ? 0 : angle,
+                    angle,
                     gunMoveSpeed * Time.fixedDeltaTime
                 );
                 gun.direction = ((Vector2)transform.right).Rotate(nextAngle);
@@ -84,28 +99,36 @@ namespace HGDFall2024.LevelElements
                 case EnemyState.Waiting:
                     lastFired = Time.time;
                     gun.gameObject.SetActive(false);
+                    TryVoiceLine(waitingSource);
                     break;
                 case EnemyState.Searching:
                     gun.gameObject.SetActive(false);
 
                     if (Time.time - lastSpotted < searchTime)
                     {
+                        TryVoiceLine(searchingSource);
                         break;
                     }
 
                     state = EnemyState.Waiting;
+                    TryVoiceLine(lostSource, true);
                     break;
                 case EnemyState.Attacking:
                     gun.gameObject.SetActive(true);
                     
                     if (player == null)
                     {
-                        state = EnemyState.Searching;
-                        lastSpotted = Time.time;
+                        if (Time.time - lastSpotted > lostTime)
+                        {
+                            TryVoiceLine(toSearchingSource, true);
+                            state = EnemyState.Searching;
+                        }
                         break;
                     }
+                    lastSpotted = Time.time;
+                    TryVoiceLine(attackingSource);
 
-                    if (Time.time - lastFired < fireInterval)
+                    if (Time.time - lastFired < fireInterval && MathF.Abs(currentAngle - angle) < 5)
                     {
                         break;
                     }
@@ -178,6 +201,21 @@ namespace HGDFall2024.LevelElements
             Waiting,
             Searching,
             Attacking
+        }
+
+        private bool TryVoiceLine(RandomAudioSource source, bool bypassWait = false)
+        {
+            if (Time.time - lastVoiceLine > voiceLineWait || bypassWait)
+            {
+                voiceLineWait = UnityEngine.Random.Range(voiceLineDelayMin, voiceLineDelayMax);
+                lastVoiceLine = Time.time;
+                if (source != null && (!source.Source.isPlaying || bypassWait))
+                {
+                    source.Play();
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

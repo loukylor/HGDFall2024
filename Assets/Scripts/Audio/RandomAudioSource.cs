@@ -38,7 +38,10 @@ namespace HGDFall2024.Audio
                 if (val > randVal)
                 {
                     source.clip = clips[i].clip;
-                    source.PlayDelayed(delay);
+                    if (source.clip != null)
+                    {
+                        source.PlayDelayed(delay);
+                    }
                     return;
                 }
             }
