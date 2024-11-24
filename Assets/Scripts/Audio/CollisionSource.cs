@@ -2,7 +2,7 @@
 
 namespace HGDFall2024.Audio
 {
-    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(RandomAudioSource))]
     [RequireComponent(typeof(Collider2D))]
     public class CollisionSource : MonoBehaviour
     {
