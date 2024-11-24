@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 104431102}
   - component: {fileID: 104431104}
   - component: {fileID: 104431103}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 620774056}
   - component: {fileID: 620774055}
   - component: {fileID: 620774058}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 872285981}
   - component: {fileID: 872285983}
   - component: {fileID: 872285982}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Balloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -876,7 +876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 874989536}
   - component: {fileID: 874989537}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1691,7 +1691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1574604146}
   - component: {fileID: 1574604147}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1783,7 +1783,7 @@ GameObject:
   - component: {fileID: 1607477778}
   - component: {fileID: 1607477780}
   - component: {fileID: 1607477779}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1903,7 +1903,7 @@ GameObject:
   - component: {fileID: 1761322456}
   - component: {fileID: 1761322455}
   - component: {fileID: 1761322454}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: NarrationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2016,7 +2016,7 @@ GameObject:
   - component: {fileID: 1851494132}
   - component: {fileID: 1851494134}
   - component: {fileID: 1851494133}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
