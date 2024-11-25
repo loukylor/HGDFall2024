@@ -50,7 +50,7 @@ MonoBehaviour:
   radius: 1.6
   blowerRotSpeed: 1440
   blowerDelay: 0.6
-  blowerLength: 0.3
+  blowerLength: 0.5
   rechargeDelay: 0.4
   blowerStrength: 2.5
   maxStrength: 7
