@@ -15,6 +15,8 @@ namespace HGDFall2024.CameraUtils
         private Rigidbody2D rb;
         private Camera cam;
 
+        private float lostTime;
+
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -41,14 +43,24 @@ namespace HGDFall2024.CameraUtils
             // Let's not lose line of sight of the player
             if (hit.rigidbody != null && hit.rigidbody != rb)
             {
-                rb.position = hit.point;
+                if (lostTime != 0)
+                {
+                    if (Time.time - lostTime > 5)
+                    {
+                        rb.position = hit.point;
+                        lostTime = 0;
+                        return;
+                    }
+                }
+                else
+                {
+                    lostTime = Time.time;
+                }
             }
-            else
-            {
-                // Lerp to object and let unity handle collisions
-                Vector2 diff = followObject.position - transform.position;
-                rb.velocity = diff * lerp / Time.fixedDeltaTime;
-            }
+
+            // Lerp to object and let unity handle collisions
+            Vector2 diff = followObject.position - transform.position;
+            rb.velocity = diff * lerp / Time.fixedDeltaTime;
 
         }
     }

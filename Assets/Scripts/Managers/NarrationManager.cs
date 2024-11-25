@@ -2,6 +2,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace HGDFall2024.Managers
 {
@@ -26,6 +27,15 @@ namespace HGDFall2024.Managers
             animator = GetComponentInChildren<Animator>(true);
             rb = GetComponent<Rigidbody2D>();
             subtitle = GetComponentInChildren<TextMeshProUGUI>(true);
+
+            SceneManager.activeSceneChanged += OnSceneChange;
+        }
+
+        private void OnSceneChange(Scene _, Scene __)
+        {
+            animator.gameObject.SetActive(false);
+            StopAllCoroutines();
+            coroutine = null;
         }
 
         private void FixedUpdate()
@@ -60,7 +70,8 @@ namespace HGDFall2024.Managers
 
         private IEnumerator Show(TriggeredAudioSource source)
         {
-            yield return new WaitForSeconds(source.delay);
+            float beforeWait = Mathf.Max(0, source.delay - 0.6f);
+            yield return new WaitForSeconds(beforeWait);
 
             animator.gameObject.SetActive(true);
             animator.Play(startStateHash);
@@ -70,7 +81,7 @@ namespace HGDFall2024.Managers
                 subtitle.gameObject.SetActive(true);
             }
 
-            yield return new WaitForSeconds(source.source.clip.length);
+            yield return new WaitForSeconds(source.source.clip.length + (source.delay - beforeWait));
 
             animator.Play(hideStateHash);
             yield return new WaitForSeconds(0.7f);
