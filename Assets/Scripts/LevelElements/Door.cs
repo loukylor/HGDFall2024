@@ -82,15 +82,17 @@ namespace HGDFall2024.LevelElements
                 && Vector2.Distance(transform.localPosition, targetPos) > 0.03)
             {
                 int contactCount = collider.GetContacts(contacts);
+                Vector2 dir = targetPos - (Vector2)transform.localPosition;
                 for (int i = 0; i < contactCount; i++)
                 {
                     if (contacts[i].collider.GetComponent<Pickupable>() == null
-                        || contacts[i].rigidbody != null 
-                        || contacts[i].rigidbody.bodyType == RigidbodyType2D.Dynamic)
+                        || contacts[i].rigidbody == null 
+                        || contacts[i].rigidbody.bodyType != RigidbodyType2D.Dynamic
+                        || Mathf.Abs(Vector2.Dot(dir.normalized, contacts[i].normal)) < 0.9)
                     {
                         continue;
                     }
-
+       
                     if (IsOpen)
                     {
                         Close();
