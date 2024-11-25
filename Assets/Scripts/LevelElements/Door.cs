@@ -88,6 +88,7 @@ namespace HGDFall2024.LevelElements
                     if (contacts[i].collider.GetComponent<Pickupable>() == null
                         || contacts[i].rigidbody == null 
                         || contacts[i].rigidbody.bodyType != RigidbodyType2D.Dynamic
+                        || contacts[i].collider.gameObject.layer == 3
                         || Mathf.Abs(Vector2.Dot(dir.normalized, contacts[i].normal)) < 0.9)
                     {
                         continue;
