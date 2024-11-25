@@ -49,13 +49,20 @@ namespace HGDFall2024.Audio
             {
                 source.clip = regularClips[Random.Range(0, regularClips.Length)];
             }
-            source.PlayDelayed(delay);
+            StartCoroutine(PlayDelayed(delay));
         }
 
         private IEnumerator SetHasPlayed()
         {
             yield return null;
             HasPlayed = true;
+        }
+
+        private IEnumerator PlayDelayed(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            source.Play();
         }
     }
 }

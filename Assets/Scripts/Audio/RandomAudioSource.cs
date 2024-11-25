@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -40,7 +41,7 @@ namespace HGDFall2024.Audio
                     source.clip = clips[i].clip;
                     if (source.clip != null)
                     {
-                        source.PlayDelayed(delay);
+                        StartCoroutine(PlayDelayed(delay));
                     }
                     return;
                 }
@@ -51,7 +52,7 @@ namespace HGDFall2024.Audio
         public void Play(AudioClip clip, float delay = 0)
         {
             source.clip = clip;
-            source.PlayDelayed(delay);
+            StartCoroutine(PlayDelayed(delay));
         }
 
         [Serializable]
@@ -59,6 +60,13 @@ namespace HGDFall2024.Audio
         {
             public AudioClip clip;
             public int weight = 1;
+        }
+
+        private IEnumerator PlayDelayed(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            source.Play();
         }
     }
 }
