@@ -219,7 +219,7 @@ AudioSource:
   m_GameObject: {fileID: 889731032179385878}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -2049853004333963379, guid: 1e904205a18742b49af76ec79bd88296, type: 2}
+  OutputAudioMixerGroup: {fileID: -3635679373696856637, guid: 1e904205a18742b49af76ec79bd88296, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -341,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96325a7a5a3bbe4388141c5486704d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleSpeed: 1
 --- !u!1 &8524285577834953929
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +355,7 @@ GameObject:
   - component: {fileID: 3355510116598082207}
   - component: {fileID: 6371456841334335192}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Woosh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,7 +388,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2049853004333963379, guid: 1e904205a18742b49af76ec79bd88296, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.579
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -398,7 +399,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 40
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
