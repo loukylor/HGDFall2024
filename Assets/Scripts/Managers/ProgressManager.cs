@@ -54,5 +54,13 @@ namespace HGDFall2024.Managers
                 .Select(element => Enum.Parse<AttachmentType>(element))
                 .ToArray();
         }
+
+        public void IncreaseLevel(int level)
+        {
+            if (AvailableLevels < level + 1)
+            {
+                AvailableLevels = (uint)level + 1;
+            }
+        }
     }
 }
