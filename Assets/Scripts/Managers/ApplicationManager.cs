@@ -42,6 +42,7 @@ namespace HGDFall2024.Managers
             {
                 Debug.Log("finish level: " + currentLevel);
                 ShowLevelMenu(LevelMenuState.LevelComplete);
+                FinishLevel(currentLevel);
             };
 
             InputManager.Instance.Player.Pause.started += OnPause;
@@ -151,9 +152,9 @@ namespace HGDFall2024.Managers
 
         public void FinishLevel(int level)
         {
-            if (ProgressManager.Instance.AvailableLevels < level)
+            if (ProgressManager.Instance.AvailableLevels < level + 1)
             {
-                ProgressManager.Instance.AvailableLevels = (uint)level;
+                ProgressManager.Instance.AvailableLevels = (uint)level + 1;
             }
             LoadLevel(level + 1);
         }

@@ -62,8 +62,9 @@ namespace HGDFall2024.UI
             for (int i = 0; i < buttons.childCount; i++)
             {
                 Button button = buttons.GetChild(i).GetComponent<Button>();
-                if (i <= ProgressManager.Instance.AvailableLevels)
+                if (i < ProgressManager.Instance.AvailableLevels)
                 {
+                    Debug.Log(i);
                     button.interactable = true;
                     button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.black;
                 }
